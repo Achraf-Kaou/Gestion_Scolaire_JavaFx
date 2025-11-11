@@ -7,6 +7,7 @@ public class Enseignant extends Personne{
     private String numeroEnseignant;
     private String specialite;
     private LocalDate dateRecrutement;
+    private String grade;
 
     public Enseignant(String nom, String prenom, String adresse, String telephone, String email, String password, String numeroEnseignant, String specialite, LocalDate dateRecrutement) {
         super(nom, prenom, adresse, telephone, email, password);
@@ -40,4 +41,7 @@ public class Enseignant extends Personne{
 
     public LocalDate getDateRecrutement() {return dateRecrutement;}
     public void setDateRecrutement(LocalDate dateRecrutement) {this.dateRecrutement = dateRecrutement;}
+
+    public String getGrade() {return grade;}
+    public void setGrade(String grade) {this.grade = grade;}
 }

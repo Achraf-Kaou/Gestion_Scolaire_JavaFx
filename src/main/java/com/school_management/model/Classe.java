@@ -15,7 +15,7 @@ public class Classe {
     private TypeDiplome typeDiplome;
     private NiveauAnnee  niveauAnnee;
     private Specialite  specialite;
-    private EmploiDuTemps emploiDuTemps;
+//    private EmploiDuTemps emploiDuTemps;
     private List<Etudiant> etudiants;
 
     public Classe() {this.etudiants = new ArrayList<>();}
@@ -68,6 +68,6 @@ public class Classe {
     public Specialite getSpecialite() {return specialite;}
     public void setSpecialite(Specialite specialite) {this.specialite = specialite;}
 
-    public EmploiDuTemps getEmploiDuTemps() {return emploiDuTemps;}
-    public void setEmploiDuTemps(EmploiDuTemps emploiDuTemps) {this.emploiDuTemps = emploiDuTemps;}
+//    public EmploiDuTemps getEmploiDuTemps() {return emploiDuTemps;}
+//    public void setEmploiDuTemps(EmploiDuTemps emploiDuTemps) {this.emploiDuTemps = emploiDuTemps;}
 }

@@ -7,16 +7,21 @@ public class Matiere {
     private Long id;
     private String nom;
     private String code;
-    private int nbHeures;
+    private int nbHeuresCours;
+    private int nbHeuresTd;
+    private int nbHeuresTp;
     private int nbCredits;
     private List<Enseignant> enseignants;
 
     public Matiere() {this.enseignants = new ArrayList<>();}
-    public Matiere(String code, String nom, int nbHeures, int nbCredits) {
-        this.code = code;
+    public Matiere(String nom, String code, int nbHeuresCours, int nbHeuresTd, int nb_heures_tp, int nbCredits) {
         this.nom = nom;
-        this.nbHeures = nbHeures;
+        this.code = code;
+        this.nbHeuresCours = nbHeuresCours;
+        this.nbHeuresTd = nbHeuresTd;
+        this.nbHeuresTp = nb_heures_tp;
         this.nbCredits = nbCredits;
+        this.enseignants = new ArrayList<>();
     }
 
     public Long getId() {return id;}
@@ -28,8 +33,14 @@ public class Matiere {
     public String getCode() {return code;}
     public void setCode(String code) {this.code = code;}
 
-    public int getNbHeures() {return nbHeures;}
-    public void setNbHeures(int nbHeures) {this.nbHeures = nbHeures;}
+    public int getNbHeuresCours() {return nbHeuresCours;}
+    public void setNbHeuresCours(int nbHeuresCours) {this.nbHeuresCours = nbHeuresCours;}
+
+    public int getNbHeuresTd() {return nbHeuresTd;}
+    public void setNbHeuresTd(int nbHeuresTd) {this.nbHeuresTd = nbHeuresTd;}
+
+    public int getNbHeuresTp() {return nbHeuresTp;}
+    public void setNbHeuresTp(int nbHeuresTp) {this.nbHeuresTp = nbHeuresTp;}
 
     public int getNbCredits() {return nbCredits;}
     public void setNbCredits(int nbCredits) {this.nbCredits = nbCredits;}

@@ -1,2 +1,2 @@
-INSERT INTO etudiant (numero_etudiant, nom, prenom, adresse, telephone, email, password, birth_date, photo, date_inscription)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+INSERT INTO etudiant (nom, prenom, adresse, telephone, email, password, birthDate, photo, numeroEtudiant, dateInscription, classeId)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);

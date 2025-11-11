@@ -1,0 +1,128 @@
+-- TABLE SPECIALITE
+CREATE TABLE specialite (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(20) UNIQUE NOT NULL,
+    nom VARCHAR(100) NOT NULL,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletedAt DATETIME NULL
+);
+
+-- TABLE MATIERE
+CREATE TABLE matiere (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(20) UNIQUE NOT NULL,
+    nom VARCHAR(100) NOT NULL,
+    nbHeuresCours INT DEFAULT 0,
+    nbHeuresTd INT DEFAULT 0,
+    nbHeuresTp INT DEFAULT 0,
+    nbCredits INT DEFAULT 0,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletedAt DATETIME NULL
+);
+
+-- Association many-to-many SPECIALITE<->MATIERE
+CREATE TABLE specialiteMatiere (
+    specialite_id BIGINT NOT NULL,
+    matiere_id BIGINT NOT NULL,
+    PRIMARY KEY (specialite_id, matiere_id),
+    FOREIGN KEY (specialite_id) REFERENCES specialite(id),
+    FOREIGN KEY (matiere_id) REFERENCES matiere(id)
+);
+
+-- TABLE CLASSE
+CREATE TABLE classe (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(20) UNIQUE NOT NULL,
+    nom VARCHAR(100) NOT NULL,
+    capaciteMax INT NOT NULL,
+    anneeScolaire VARCHAR(20) NOT NULL,
+    typeDiplome ENUM('LICENCE', 'MASTERE', 'INGENIEUR', 'DOCTORAT') NOT NULL,
+    niveauAnnee ENUM('PREMIERE_ANNEE', 'DEUXIEME_ANNEE', 'TROISIEME_ANNEE', 'QUATRIEME_ANNEE', 'CINQUIEME_ANNEE') NOT NULL,
+    specialiteId BIGINT NOT NULL,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletedAt DATETIME NULL,
+    FOREIGN KEY (specialiteId) REFERENCES specialite(id)
+);
+
+-- TABLE EMPLOI_DU_TEMPS
+CREATE TABLE emploiDuTemps (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    classeId BIGINT NOT NULL UNIQUE,
+    anneeScolaire VARCHAR(20) NOT NULL,
+    semestre ENUM('SEMESTRE_1', 'SEMESTRE_2') NOT NULL,
+    dateDebut DATE, dateFin DATE,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletedAt DATETIME NULL,
+    FOREIGN KEY (classeId) REFERENCES classe(id)
+);
+
+-- TABLE ENSEIGNANT
+CREATE TABLE enseignant (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    prenom VARCHAR(100) NOT NULL,
+    adresse VARCHAR(255),
+    telephone VARCHAR(20),
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    birthDate DATE,
+    photo BLOB,
+    numeroEnseignant VARCHAR(50) UNIQUE NOT NULL,
+    specialite VARCHAR(100),
+    grade VARCHAR(50),
+    dateRecrutement DATE,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletedAt DATETIME NULL
+);
+
+-- Association many-to-many ENSEIGNANT<->MATIERE (liste de matières enseignées)
+CREATE TABLE enseignantMatiere (
+    enseignantId BIGINT NOT NULL,
+    matiereId BIGINT NOT NULL,
+    PRIMARY KEY (enseignantId, matiereId),
+    FOREIGN KEY (enseignantId) REFERENCES enseignant(id),
+    FOREIGN KEY (matiereId) REFERENCES matiere(id)
+);
+
+-- TABLE ETUDIANT (avec clef étrangère vers CLASSE)
+CREATE TABLE etudiant (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    prenom VARCHAR(100) NOT NULL,
+    adresse VARCHAR(255),
+    telephone VARCHAR(20),
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    birthDate DATE,
+    photo BLOB,
+    numeroEtudiant VARCHAR(50) UNIQUE NOT NULL,
+    dateInscription Date NOT NULL,
+    classeId BIGINT NOT NULL,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletedAt DATETIME NULL,
+    FOREIGN KEY (classeId) REFERENCES classe(id)
+);
+
+-- TABLE SEANCE
+CREATE TABLE seance (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    jour VARCHAR(20) NOT NULL,
+    heureDebut TIME NOT NULL,
+    heureFin TIME NOT NULL,
+    salle VARCHAR(50),
+    matiereId BIGINT NOT NULL,
+    enseignantId BIGINT NOT NULL,
+    emploiDuTempsId BIGINT NOT NULL,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletedAt DATETIME NULL,
+    FOREIGN KEY (matiereId) REFERENCES matiere(id),
+    FOREIGN KEY (enseignantId) REFERENCES enseignant(id),
+    FOREIGN KEY (emploiDuTempsId) REFERENCES emploiDuTemps(id)
+);

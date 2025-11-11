@@ -1,1 +1,1 @@
-SELECT * FROM etudiant WHERE classe_id = ?;
+SELECT * FROM etudiant WHERE classeId = ? AND deletedAt IS NULL;

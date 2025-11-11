@@ -1,1 +1,14 @@
-UPDATE etudiant SET numero_etudiant = ?, nom = ?, prenom = ?, adresse = ?, telephone = ?, email = ?, password = ?, birth_date = ?, photo = ?, date_inscription = ? WHERE id = ?;
+UPDATE etudiant SET
+                    nom = ?,
+                    prenom = ?,
+                    adresse = ?,
+                    telephone = ?,
+                    email = ?,
+                    password = ?,
+                    birthDate = ?,
+                    photo = ?,
+                    numeroEtudiant = ?,
+                    dateInscription = ?,
+                    classeId = ?,
+                    updatedAt = NOW()
+WHERE id = ?;

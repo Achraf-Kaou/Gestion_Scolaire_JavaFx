@@ -1,1 +1,1 @@
-SELECT * FROM etudiant;
+SELECT * FROM etudiant WHERE deletedAt IS NULL;

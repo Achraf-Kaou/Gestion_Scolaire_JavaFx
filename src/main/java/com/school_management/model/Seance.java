@@ -7,26 +7,26 @@ import java.time.LocalTime;
 public class Seance {
     private Long id;
     private LocalDate jour;
-    private LocalTime debut;
-    private LocalTime fin;
+    private LocalTime heureDebut;
+    private LocalTime heureFin;
     private String salle;
     private Matiere matiere;
     private Enseignant enseignant;
-    private Classe classe;
+    private EmploiDuTemps emploiDuTemps;
 
-    public Seance(LocalDate jour, LocalTime debut, LocalTime fin, String salle, Matiere matiere, Enseignant enseignant, Classe classe) {
+    public Seance(LocalDate jour, LocalTime heureDebut, LocalTime heureFin, String salle, Matiere matiere, Enseignant enseignant, EmploiDuTemps emploiDuTemps) {
         this.jour = jour;
-        this.debut = debut;
-        this.fin = fin;
+        this.heureDebut = heureDebut;
+        this.heureFin = heureFin;
         this.salle = salle;
         this.matiere = matiere;
         this.enseignant = enseignant;
-        this.classe = classe;
+        this.emploiDuTemps = emploiDuTemps;
     }
 
     public Integer getDuree() {
         try {
-            return (int) Duration.between(debut, fin).toMinutes();
+            return (int) Duration.between(heureDebut, heureFin).toMinutes();
         } catch (Exception e) {
             return 0;
         }
@@ -38,11 +38,11 @@ public class Seance {
     public LocalDate getJour() {return jour;}
     public void setJour(LocalDate jour) {this.jour = jour;}
 
-    public LocalTime getDebut() {return debut;}
-    public void setDebut(LocalTime debut) {this.debut = debut;}
+    public LocalTime getHeureDebut() {return heureDebut;}
+    public void setHeureDebut(LocalTime heureDebut) {this.heureDebut = heureDebut;}
 
-    public LocalTime getFin() {return fin;}
-    public void setFin(LocalTime fin) {this.fin = fin;}
+    public LocalTime getHeureFin() {return heureFin;}
+    public void setHeureFin(LocalTime heureFin) {this.heureFin = heureFin;}
 
     public String getSalle() {return salle;}
     public void setSalle(String salle) {this.salle = salle;}
@@ -53,6 +53,6 @@ public class Seance {
     public Enseignant getEnseignant() {return enseignant;}
     public void setEnseignant(Enseignant enseignant) {this.enseignant = enseignant;}
 
-    public Classe getClasse() {return classe;}
-    public void setClasse(Classe classe) {this.classe = classe;}
+    public EmploiDuTemps getEmploiDuTemps() {return emploiDuTemps;}
+    public void setEmploiDuTemps(EmploiDuTemps emploiDuTemps) {this.emploiDuTemps = emploiDuTemps;}
 }

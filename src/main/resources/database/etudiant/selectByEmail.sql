@@ -1,0 +1,1 @@
+SELECT * FROM etudiant WHERE email LIKE ? AND deletedAt IS NULL;

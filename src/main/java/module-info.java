@@ -12,6 +12,7 @@ module com.school_management.school_management {
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires mysql.connector.j;
+    requires jdk.jdi;
 
     opens com.school_management to javafx.fxml;
     exports com.school_management;

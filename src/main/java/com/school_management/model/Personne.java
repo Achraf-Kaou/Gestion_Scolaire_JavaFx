@@ -12,8 +12,9 @@ public abstract class Personne {
     protected String email;
     protected String password;
     protected LocalDate birthDate;
-    protected Byte[] photo;
+    protected byte[] photo;
 
+    public Personne() {}
     public Personne (String nom, String prenom, String adresse, String telephone, String email, String password) {
         this.nom = nom;
         this.prenom = prenom;
@@ -22,6 +23,16 @@ public abstract class Personne {
         this.email = email;
         this.password = password;
         this.birthDate = LocalDate.now();
+    }
+    public Personne(String nom, String prenom, String adresse, String telephone, String email, String password, LocalDate birthDate, byte[] photo) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.telephone = telephone;
+        this.email = email;
+        this.password = password;
+        this.birthDate = birthDate;
+        this.photo = photo;
     }
 
     public int getAge() {
@@ -57,6 +68,6 @@ public abstract class Personne {
     public LocalDate getBirthDate() {return birthDate;}
     public void setBirthDate(LocalDate birthDate) {this.birthDate = birthDate;}
 
-    public Byte[] getPhoto() {return photo;}
-    public void setPhoto(Byte[] photo) {this.photo = photo;}
+    public byte[] getPhoto() {return photo;}
+    public void setPhoto(byte[] photo) {this.photo = photo;}
 }

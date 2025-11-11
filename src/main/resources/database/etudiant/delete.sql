@@ -1,1 +1,1 @@
-DELETE FROM etudiant WHERE id = ?;
+UPDATE etudiant SET deletedAt = NOW() WHERE id = ?;
