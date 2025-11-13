@@ -1,27 +1,30 @@
 package com.school_management.model;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Seance {
     private Long id;
-    private LocalDate jour;
+    private String jour;
     private LocalTime heureDebut;
     private LocalTime heureFin;
     private String salle;
+    private Long matiereId;
     private Matiere matiere;
+    private Long enseignantId;
     private Enseignant enseignant;
+    private Long emploiDuTempsId;
     private EmploiDuTemps emploiDuTemps;
 
-    public Seance(LocalDate jour, LocalTime heureDebut, LocalTime heureFin, String salle, Matiere matiere, Enseignant enseignant, EmploiDuTemps emploiDuTemps) {
+    public Seance() {}
+    public Seance(String jour, LocalTime heureDebut, LocalTime heureFin, String salle, Long matiereId, Long enseignantId, Long emploiDuTempsId) {
         this.jour = jour;
         this.heureDebut = heureDebut;
         this.heureFin = heureFin;
         this.salle = salle;
-        this.matiere = matiere;
-        this.enseignant = enseignant;
-        this.emploiDuTemps = emploiDuTemps;
+        this.matiereId = matiereId;
+        this.enseignantId = enseignantId;
+        this.emploiDuTempsId = emploiDuTempsId;
     }
 
     public Integer getDuree() {
@@ -35,8 +38,8 @@ public class Seance {
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
 
-    public LocalDate getJour() {return jour;}
-    public void setJour(LocalDate jour) {this.jour = jour;}
+    public String getJour() {return jour;}
+    public void setJour(String jour) {this.jour = jour;}
 
     public LocalTime getHeureDebut() {return heureDebut;}
     public void setHeureDebut(LocalTime heureDebut) {this.heureDebut = heureDebut;}
@@ -55,4 +58,13 @@ public class Seance {
 
     public EmploiDuTemps getEmploiDuTemps() {return emploiDuTemps;}
     public void setEmploiDuTemps(EmploiDuTemps emploiDuTemps) {this.emploiDuTemps = emploiDuTemps;}
+
+    public Long getMatiereId() {return matiereId;}
+    public void setMatiereId(Long matiereId) {this.matiereId = matiereId;}
+
+    public Long getEnseignantId() {return enseignantId;}
+    public void setEnseignantId(Long enseignantId) {this.enseignantId = enseignantId;}
+
+    public Long getEmploiDuTempsId() {return emploiDuTempsId;}
+    public void setEmploiDuTempsId(Long emploiDuTempsId) {this.emploiDuTempsId = emploiDuTempsId;}
 }

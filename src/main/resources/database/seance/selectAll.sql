@@ -1,0 +1,1 @@
+SELECT * FROM seance WHERE deletedAt IS NULL;
