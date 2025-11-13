@@ -1,0 +1,1 @@
+SELECT * FROM emploiDuTemps WHERE classeId = ? AND deletedAt IS NULL;
