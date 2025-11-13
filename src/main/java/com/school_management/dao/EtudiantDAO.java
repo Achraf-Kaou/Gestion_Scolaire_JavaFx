@@ -12,7 +12,7 @@ public interface EtudiantDAO {
     void ajouter(Etudiant etudiant) throws SQLException, IOException;
     List<Etudiant> lireTous() throws SQLException, IOException;
     List<Etudiant> lireParClasse(Long classeId) throws SQLException, IOException;
-    List<Etudiant> lireParEmail(String Email) throws SQLException, IOException;
+    Etudiant lireParEmail(String Email) throws SQLException, IOException;
     List<Etudiant> lireParNiveauAnnee(NiveauAnnee niveauAnnee) throws SQLException, IOException;
     List<Etudiant> lireParTypeDiplome(TypeDiplome typeDiplome) throws SQLException, IOException;
     List<Etudiant> lireParTypeDiplomeEtNiveauAnnee(TypeDiplome typeDiplome, NiveauAnnee niveauAnnee) throws SQLException, IOException;

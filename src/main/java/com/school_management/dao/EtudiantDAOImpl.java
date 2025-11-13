@@ -2,14 +2,12 @@ package com.school_management.dao;
 
 import com.school_management.model.Etudiant;
 import com.school_management.config.DatabaseConfig;
-import com.school_management.model.Specialite;
 import com.school_management.model.enums.NiveauAnnee;
 import com.school_management.model.enums.TypeDiplome;
 import com.school_management.utils.SqlLoader;
 
 import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,17 +60,16 @@ public class EtudiantDAOImpl implements EtudiantDAO {
     }
 
     @Override
-    public List<Etudiant> lireParEmail(String email) throws SQLException, IOException {
+    public Etudiant lireParEmail(String email) throws SQLException, IOException {
         String sql = SqlLoader.load("database/etudiant/selectByEmail.sql");
-        List<Etudiant> etudiants = new ArrayList<>();
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) etudiants.add(map(rs));
+                if (rs.next()) return map(rs);
             }
         }
-        return etudiants;
+        return null;
     }
 
     @Override

@@ -1,0 +1,1 @@
+SELECT * FROM enseignant WHERE specialite = ? AND deletedAt IS NULL;

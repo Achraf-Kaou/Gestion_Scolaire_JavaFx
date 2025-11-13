@@ -1,0 +1,1 @@
+SELECT * FROM enseignant WHERE id = ? AND deletedAt IS NULL;

@@ -1,0 +1,1 @@
+UPDATE enseignant SET deletedAt = NOW() WHERE id = ?;

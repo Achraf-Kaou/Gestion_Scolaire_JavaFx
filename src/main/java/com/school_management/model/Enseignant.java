@@ -9,6 +9,7 @@ public class Enseignant extends Personne{
     private LocalDate dateRecrutement;
     private String grade;
 
+    public Enseignant() { super(); }
     public Enseignant(String nom, String prenom, String adresse, String telephone, String email, String password, String numeroEnseignant, String specialite, LocalDate dateRecrutement) {
         super(nom, prenom, adresse, telephone, email, password);
         this.numeroEnseignant = numeroEnseignant;
