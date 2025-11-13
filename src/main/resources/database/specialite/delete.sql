@@ -1,0 +1,1 @@
+UPDATE specialite SET deletedAt = NOW() WHERE id = ?;

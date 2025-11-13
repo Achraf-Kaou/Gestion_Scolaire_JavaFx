@@ -1,0 +1,1 @@
+SELECT * FROM specialite WHERE id = ? AND deletedAt IS NULL;

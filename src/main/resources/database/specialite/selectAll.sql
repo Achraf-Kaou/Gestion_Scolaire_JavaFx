@@ -1,0 +1,1 @@
+SELECT * FROM specialite WHERE deletedAt IS NULL;
