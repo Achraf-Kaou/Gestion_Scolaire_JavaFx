@@ -1,0 +1,1 @@
+SELECT * FROM matiere WHERE id = ? AND deletedAt IS NULL;

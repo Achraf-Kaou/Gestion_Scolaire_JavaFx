@@ -1,0 +1,1 @@
+UPDATE matiere SET deletedAt = NOW() WHERE id = ?;
