@@ -14,6 +14,7 @@ public class Classe {
     private String anneeScolaire;
     private TypeDiplome typeDiplome;
     private NiveauAnnee  niveauAnnee;
+    private Long specialiteId;
     private Specialite  specialite;
 //    private EmploiDuTemps emploiDuTemps;
     private List<Etudiant> etudiants;
@@ -64,6 +65,9 @@ public class Classe {
 
     public NiveauAnnee getNiveauAnnee() {return niveauAnnee;}
     public void setNiveauAnnee(NiveauAnnee niveauAnnee) {this.niveauAnnee = niveauAnnee;}
+
+    public Long getSpecialiteId() {return specialiteId;}
+    public void setSpecialiteId(Long specialiteId) {this.specialiteId = specialiteId;}
 
     public Specialite getSpecialite() {return specialite;}
     public void setSpecialite(Specialite specialite) {this.specialite = specialite;}

@@ -1,0 +1,1 @@
+SELECT * FROM classe WHERE specialiteId = ? AND deletedAt IS NULL;

@@ -1,0 +1,1 @@
+SELECT * FROM classe WHERE id = ? AND deletedAt IS NULL;
