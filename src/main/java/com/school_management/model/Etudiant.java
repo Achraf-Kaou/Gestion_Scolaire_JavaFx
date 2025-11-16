@@ -5,16 +5,17 @@ import java.time.LocalDate;
 public class Etudiant extends Personne {
     private String numeroEtudiant;
     private LocalDate dateInscription;
+    private Long classeId;
     private Classe classe;
 
     public Etudiant() {
         super();
     }
-    public Etudiant(String nom, String prenom, String adresse, String telephone, String email, String password, String numeroEtudiant, LocalDate dateInscription, Classe classe) {
-        super(nom, prenom, adresse, telephone, email, password);
+    public Etudiant(Long id, String nom, String prenom, String adresse, String telephone, String email, String password, String numeroEtudiant, LocalDate dateInscription, Long classeId) {
+        super(id, nom, prenom, adresse, telephone, email, password);
         this.numeroEtudiant = numeroEtudiant;
         this.dateInscription = dateInscription;
-        this.classe = classe;
+        this.classeId = classeId;
     }
 
     @Override
@@ -30,4 +31,7 @@ public class Etudiant extends Personne {
 
     public Classe getClasse() {return classe;}
     public void setClasse(Classe classe) {this.classe = classe;}
+
+    public Long getClasseId() {return classeId;}
+    public void setClasseId(Long classeId) {this.classeId = classeId;}
 }

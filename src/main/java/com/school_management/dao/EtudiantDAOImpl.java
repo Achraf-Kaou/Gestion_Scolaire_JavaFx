@@ -28,7 +28,7 @@ public class EtudiantDAOImpl implements EtudiantDAO {
             pstmt.setBytes(8, etudiant.getPhoto() != null ? convertByteArray(etudiant.getPhoto()) : null);
             pstmt.setString(9, etudiant.getNumeroEtudiant());
             pstmt.setDate(10, etudiant.getDateInscription() != null ? Date.valueOf(etudiant.getDateInscription()) : null);
-            pstmt.setLong(11, etudiant.getClasse().getId());
+            pstmt.setLong(11, etudiant.getClasseId());
             pstmt.executeUpdate();
         }
     }
@@ -136,7 +136,12 @@ public class EtudiantDAOImpl implements EtudiantDAO {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setLong(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) return map(rs);
+                if (rs.next()) {
+                    System.out.println(rs.getLong("id"));
+                    System.out.println(rs.getString("nom"));
+                    System.out.println(rs.getString("prenom"));
+                    return map(rs);
+                };
             }
         }
         return null;
@@ -187,7 +192,7 @@ public class EtudiantDAOImpl implements EtudiantDAO {
         e.setPhoto(rs.getBytes("photo"));
         e.setNumeroEtudiant(rs.getString("numeroEtudiant"));
         e.setDateInscription(rs.getDate("dateInscription") != null ? rs.getDate("dateInscription").toLocalDate() : null);
-        e.getClasse().setId(rs.getLong("classeId"));
+        e.setClasseId(rs.getLong("classeId"));
         return e;
     }
 

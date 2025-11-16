@@ -10,8 +10,8 @@ public class Enseignant extends Personne{
     private String grade;
 
     public Enseignant() { super(); }
-    public Enseignant(String nom, String prenom, String adresse, String telephone, String email, String password, String numeroEnseignant, String specialite, LocalDate dateRecrutement) {
-        super(nom, prenom, adresse, telephone, email, password);
+    public Enseignant(Long id, String nom, String prenom, String adresse, String telephone, String email, String password, String numeroEnseignant, String specialite, LocalDate dateRecrutement) {
+        super(id, nom, prenom, adresse, telephone, email, password);
         this.numeroEnseignant = numeroEnseignant;
         this.specialite = specialite;
         this.dateRecrutement = dateRecrutement;

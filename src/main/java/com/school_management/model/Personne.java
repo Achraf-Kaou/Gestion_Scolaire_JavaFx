@@ -15,7 +15,8 @@ public abstract class Personne {
     protected byte[] photo;
 
     public Personne() {}
-    public Personne (String nom, String prenom, String adresse, String telephone, String email, String password) {
+    public Personne (Long id, String nom, String prenom, String adresse, String telephone, String email, String password) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -24,7 +25,8 @@ public abstract class Personne {
         this.password = password;
         this.birthDate = LocalDate.now();
     }
-    public Personne(String nom, String prenom, String adresse, String telephone, String email, String password, LocalDate birthDate, byte[] photo) {
+    public Personne(Long id, String nom, String prenom, String adresse, String telephone, String email, String password, LocalDate birthDate, byte[] photo) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
