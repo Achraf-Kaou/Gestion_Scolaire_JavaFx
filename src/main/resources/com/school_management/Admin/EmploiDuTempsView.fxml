@@ -40,6 +40,7 @@
         <Button text="Ajouter" fx:id="btnAjouter"/>
         <Button text="Modifier" fx:id="btnModifier"/>
         <Button text="Supprimer" fx:id="btnSupprimer"/>
+        <Button text="Voir l'emploi du temps" fx:id="btnVoirEmploi" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
     </HBox>
 
     <Label text="Note: Pour ajouter des séances à un emploi du temps, utilisez la gestion des séances" 

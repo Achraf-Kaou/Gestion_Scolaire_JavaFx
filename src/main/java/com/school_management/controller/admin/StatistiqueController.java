@@ -38,14 +38,14 @@ public class StatistiqueController {
 
     private void loadStatistics() {
         try {
-            int nbEtudiants = etudiantService.listeEtudiants().size();
+            int nbEtudiants = etudiantService.lireTous().size();
             lblNbEtudiants.setText(String.valueOf(nbEtudiants));
         } catch (Exception e) {
             lblNbEtudiants.setText("Erreur");
         }
 
         try {
-            int nbEnseignants = enseignantService.listeEnseignants().size();
+            int nbEnseignants = enseignantService.lireTous().size();
             lblNbEnseignants.setText(String.valueOf(nbEnseignants));
         } catch (Exception e) {
             lblNbEnseignants.setText("Erreur");
@@ -81,7 +81,7 @@ public class StatistiqueController {
     private void loadPieChart() {
         try {
             List<Classe> classes = classeService.lireTous();
-            List<Etudiant> etudiants = etudiantService.listeEtudiants();
+            List<Etudiant> etudiants = etudiantService.lireTous();
             
             Map<String, Integer> etudiantsParClasse = new HashMap<>();
             

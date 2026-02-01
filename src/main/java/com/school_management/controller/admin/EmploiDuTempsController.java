@@ -25,6 +25,7 @@ public class EmploiDuTempsController {
     @FXML private Button btnAjouter;
     @FXML private Button btnModifier;
     @FXML private Button btnSupprimer;
+    @FXML private Button btnVoirEmploi;
     @FXML private TableView<EmploiDuTemps> table;
     @FXML private TableColumn<EmploiDuTemps, Long> colId;
     @FXML private TableColumn<EmploiDuTemps, String> colClasse;
@@ -86,6 +87,7 @@ public class EmploiDuTempsController {
         btnAjouter.setOnAction(e -> ajouterEmploiDuTemps());
         btnModifier.setOnAction(e -> modifierEmploiDuTemps());
         btnSupprimer.setOnAction(e -> supprimerEmploiDuTemps());
+        btnVoirEmploi.setOnAction(e -> voirEmploiDuTemps());
 
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
@@ -226,5 +228,22 @@ public class EmploiDuTempsController {
         alert.setHeaderText(titre);
         alert.setContentText(msg);
         alert.showAndWait();
+    }
+
+    private void voirEmploiDuTemps() {
+        try {
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
+                getClass().getResource("/com/school_management/Admin/ScheduleDisplayView.fxml")
+            );
+            javafx.scene.Parent root = loader.load();
+            
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setTitle("Affichage de l'Emploi du Temps");
+            stage.setScene(new javafx.scene.Scene(root, 1000, 700));
+            stage.show();
+        } catch (Exception e) {
+            alert("Erreur", "Impossible d'ouvrir la vue de l'emploi du temps :\n" + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

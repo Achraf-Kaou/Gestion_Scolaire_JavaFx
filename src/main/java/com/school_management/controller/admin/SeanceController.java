@@ -50,7 +50,7 @@ public class SeanceController {
     public void initialize() {
         try {
             matieres.setAll(matiereService.listeMatieres());
-            enseignants.setAll(enseignantService.listeEnseignants());
+            enseignants.setAll(enseignantService.lireTous());
             List<EmploiDuTemps> edtList = emploiDuTempsService.lireTous();
             for (EmploiDuTemps edt : edtList) {
                 if (edt.getClasseId() != null) {
@@ -205,7 +205,7 @@ public class SeanceController {
             // Load related objects for each seance
             for (Seance s : seanceList) {
                 if (s.getMatiereId() != null) {
-                    s.setMatiere(matiereService.lireParId(s.getMatiereId()));
+                    s.setMatiere(matiereService.listeMatieresId(s.getMatiereId()));
                 }
                 if (s.getEnseignantId() != null) {
                     s.setEnseignant(enseignantService.lireParId(s.getEnseignantId()));
