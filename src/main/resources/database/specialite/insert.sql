@@ -1,2 +1,6 @@
 INSERT INTO specialite (code, nom)
-VALUES (?, ?);
+VALUES (?, ?)
+ON DUPLICATE KEY UPDATE 
+    nom = VALUES(nom),
+    deletedAt = NULL,
+    updatedAt = CURRENT_TIMESTAMP;

@@ -13,23 +13,50 @@
     <Label text="Gestion des matières" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
 
     <HBox spacing="10">
-        <Label text="Code:"/>
-        <TextField fx:id="txtCode" promptText="Code matière" prefWidth="120"/>
-        <Label text="Nom:"/>
-        <TextField fx:id="txtNom" promptText="Nom matière" prefWidth="180"/>
-        <Label text="ID Spécialité:"/>
-        <TextField fx:id="txtSpecialiteId" promptText="Spécialité ID" prefWidth="80"/>
+        <VBox spacing="5">
+            <Label text="Code:"/>
+            <TextField fx:id="txtCode" promptText="Code matière" prefWidth="120"/>
+        </VBox>
+        <VBox spacing="5">
+            <Label text="Nom:"/>
+            <TextField fx:id="txtNom" promptText="Nom matière" prefWidth="180"/>
+        </VBox>
+        <VBox spacing="5">
+            <Label text="Heures Cours:"/>
+            <TextField fx:id="txtNbHeuresCours" promptText="0" prefWidth="80"/>
+        </VBox>
+        <VBox spacing="5">
+            <Label text="Heures TD:"/>
+            <TextField fx:id="txtNbHeuresTd" promptText="0" prefWidth="80"/>
+        </VBox>
+        <VBox spacing="5">
+            <Label text="Heures TP:"/>
+            <TextField fx:id="txtNbHeuresTp" promptText="0" prefWidth="80"/>
+        </VBox>
+        <VBox spacing="5">
+            <Label text="Crédits:"/>
+            <TextField fx:id="txtNbCredits" promptText="0" prefWidth="80"/>
+        </VBox>
+    </HBox>
+
+    <HBox spacing="10">
         <Button text="Ajouter" fx:id="btnAjouter"/>
         <Button text="Modifier" fx:id="btnModifier"/>
         <Button text="Supprimer" fx:id="btnSupprimer"/>
     </HBox>
 
+    <Label text="Note: L'affectation des matières aux spécialités se fait dans 'Gestion spécialités'" 
+           style="-fx-font-style: italic; -fx-text-fill: #555;"/>
+
     <TableView fx:id="table" prefHeight="300" style="-fx-background-color: #f6f6f6;">
         <columns>
             <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
             <TableColumn fx:id="colCode" text="Code" prefWidth="100"/>
-            <TableColumn fx:id="colNom" text="Nom" prefWidth="150"/>
-            <TableColumn fx:id="colSpecialiteId" text="ID Spécialité" prefWidth="100"/>
+            <TableColumn fx:id="colNom" text="Nom" prefWidth="180"/>
+            <TableColumn fx:id="colNbHeuresCours" text="H. Cours" prefWidth="80"/>
+            <TableColumn fx:id="colNbHeuresTd" text="H. TD" prefWidth="80"/>
+            <TableColumn fx:id="colNbHeuresTp" text="H. TP" prefWidth="80"/>
+            <TableColumn fx:id="colNbCredits" text="Crédits" prefWidth="80"/>
         </columns>
     </TableView>
 </VBox>

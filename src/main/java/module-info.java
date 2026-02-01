@@ -8,11 +8,10 @@ module com.school_management.school_management {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
-    requires com.almasb.fxgl.all;
+    // requires eu.hansolo.tilesfx;  // Commented out - requires Java 21
+    // requires com.almasb.fxgl.all;  // Commented out - requires Java 21
     requires java.sql;
     requires mysql.connector.j;
-    requires jdk.jdi;
 
     opens com.school_management to javafx.fxml;
     opens com.school_management.controller to javafx.fxml;

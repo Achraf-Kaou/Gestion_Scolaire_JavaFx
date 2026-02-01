@@ -12,7 +12,10 @@ public class MatiereController {
 
     @FXML private TextField txtCode;
     @FXML private TextField txtNom;
-    @FXML private TextField txtSpecialiteId;
+    @FXML private TextField txtNbHeuresCours;
+    @FXML private TextField txtNbHeuresTd;
+    @FXML private TextField txtNbHeuresTp;
+    @FXML private TextField txtNbCredits;
     @FXML private Button btnAjouter;
     @FXML private Button btnModifier;
     @FXML private Button btnSupprimer;
@@ -20,7 +23,10 @@ public class MatiereController {
     @FXML private TableColumn<Matiere, Long> colId;
     @FXML private TableColumn<Matiere, String> colCode;
     @FXML private TableColumn<Matiere, String> colNom;
-    @FXML private TableColumn<Matiere, Long> colSpecialiteId;
+    @FXML private TableColumn<Matiere, Integer> colNbHeuresCours;
+    @FXML private TableColumn<Matiere, Integer> colNbHeuresTd;
+    @FXML private TableColumn<Matiere, Integer> colNbHeuresTp;
+    @FXML private TableColumn<Matiere, Integer> colNbCredits;
 
     private final MatiereService service = new MatiereServiceImpl();
     private final ObservableList<Matiere> matieres = FXCollections.observableArrayList();
@@ -30,7 +36,10 @@ public class MatiereController {
         colId.setCellValueFactory(data -> new javafx.beans.property.SimpleLongProperty(data.getValue().getId()).asObject());
         colCode.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getCode()));
         colNom.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNom()));
-//        colSpecialiteId.setCellValueFactory(data -> new javafx.beans.property.SimpleLongProperty(data.getValue().getSpecialiteId()).asObject());
+        colNbHeuresCours.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getNbHeuresCours()).asObject());
+        colNbHeuresTd.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getNbHeuresTd()).asObject());
+        colNbHeuresTp.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getNbHeuresTp()).asObject());
+        colNbCredits.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getNbCredits()).asObject());
 
         table.setItems(matieres);
         refreshTable();
@@ -43,7 +52,10 @@ public class MatiereController {
             if (newSel != null) {
                 txtCode.setText(newSel.getCode());
                 txtNom.setText(newSel.getNom());
-//                txtSpecialiteId.setText(String.valueOf(newSel.getSpecialiteId()));
+                txtNbHeuresCours.setText(String.valueOf(newSel.getNbHeuresCours()));
+                txtNbHeuresTd.setText(String.valueOf(newSel.getNbHeuresTd()));
+                txtNbHeuresTp.setText(String.valueOf(newSel.getNbHeuresTp()));
+                txtNbCredits.setText(String.valueOf(newSel.getNbCredits()));
             }
         });
     }
@@ -59,24 +71,23 @@ public class MatiereController {
     private void ajouterMatiere() {
         String code = txtCode.getText();
         String nom = txtNom.getText();
-        String specialiteIdStr = txtSpecialiteId.getText();
 
-        if (code.isBlank() || nom.isBlank() || specialiteIdStr.isBlank()) {
-            alert("Validation", "Veuillez remplir tous les champs.");
+        if (code.isBlank() || nom.isBlank()) {
+            alert("Validation", "Veuillez remplir au moins le code et le nom.");
             return;
         }
 
         try {
-            long specialiteId = Long.parseLong(specialiteIdStr);
             Matiere m = new Matiere();
             m.setCode(code);
             m.setNom(nom);
-//            m.setSpecialiteId(specialiteId);
+            m.setNbHeuresCours(parseIntOrZero(txtNbHeuresCours.getText()));
+            m.setNbHeuresTd(parseIntOrZero(txtNbHeuresTd.getText()));
+            m.setNbHeuresTp(parseIntOrZero(txtNbHeuresTp.getText()));
+            m.setNbCredits(parseIntOrZero(txtNbCredits.getText()));
             service.ajouter(m);
             refreshTable();
             clearFields();
-        } catch (NumberFormatException nfe) {
-            alert("Validation", "L'ID spécialité doit être un nombre.");
         } catch (Exception e) {
             alert("Erreur", "Impossible d'ajouter :\n" + e.getMessage());
         }
@@ -90,15 +101,15 @@ public class MatiereController {
         }
 
         try {
-            long specialiteId = Long.parseLong(txtSpecialiteId.getText());
             selected.setCode(txtCode.getText());
             selected.setNom(txtNom.getText());
-//            selected.setSpecialiteId(specialiteId);
+            selected.setNbHeuresCours(parseIntOrZero(txtNbHeuresCours.getText()));
+            selected.setNbHeuresTd(parseIntOrZero(txtNbHeuresTd.getText()));
+            selected.setNbHeuresTp(parseIntOrZero(txtNbHeuresTp.getText()));
+            selected.setNbCredits(parseIntOrZero(txtNbCredits.getText()));
             service.modifier(selected);
             refreshTable();
             clearFields();
-        } catch (NumberFormatException nfe) {
-            alert("Validation", "L'ID spécialité doit être un nombre.");
         } catch (Exception e) {
             alert("Erreur", "Impossible de modifier :\n" + e.getMessage());
         }
@@ -123,7 +134,18 @@ public class MatiereController {
     private void clearFields() {
         txtCode.clear();
         txtNom.clear();
-        txtSpecialiteId.clear();
+        txtNbHeuresCours.clear();
+        txtNbHeuresTd.clear();
+        txtNbHeuresTp.clear();
+        txtNbCredits.clear();
+    }
+
+    private int parseIntOrZero(String text) {
+        try {
+            return text.isBlank() ? 0 : Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     private void alert(String title, String msg) {
