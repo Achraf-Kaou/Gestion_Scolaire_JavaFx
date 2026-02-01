@@ -131,8 +131,14 @@ public class EmploiDuTempsController {
         }
 
         try {
+            Classe selectedClasse = cbClasse.getValue();
+            if (selectedClasse == null) {
+                alert("Erreur", "Veuillez sélectionner une classe.");
+                return;
+            }
+
             EmploiDuTemps edt = new EmploiDuTemps();
-            edt.setClasseId(cbClasse.getValue().getId());
+            edt.setClasseId(selectedClasse.getId());
             edt.setAnneeScolaire(txtAnneeScolaire.getText());
             edt.setSemestre(cbSemestre.getValue());
             edt.setDateDebut(dpDateDebut.getValue());
@@ -159,7 +165,13 @@ public class EmploiDuTempsController {
         }
 
         try {
-            selected.setClasseId(cbClasse.getValue().getId());
+            Classe selectedClasse = cbClasse.getValue();
+            if (selectedClasse == null) {
+                alert("Erreur", "Veuillez sélectionner une classe.");
+                return;
+            }
+
+            selected.setClasseId(selectedClasse.getId());
             selected.setAnneeScolaire(txtAnneeScolaire.getText());
             selected.setSemestre(cbSemestre.getValue());
             selected.setDateDebut(dpDateDebut.getValue());

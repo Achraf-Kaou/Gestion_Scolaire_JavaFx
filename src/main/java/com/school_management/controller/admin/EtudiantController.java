@@ -136,6 +136,12 @@ public class EtudiantController {
         }
 
         try {
+            Classe selectedClasse = cbClasse.getValue();
+            if (selectedClasse == null) {
+                alert("Erreur", "Veuillez sélectionner une classe.");
+                return;
+            }
+
             Etudiant etudiant = new Etudiant();
             etudiant.setNom(txtNom.getText());
             etudiant.setPrenom(txtPrenom.getText());
@@ -146,7 +152,7 @@ public class EtudiantController {
             etudiant.setPassword(txtPassword.getText());
             etudiant.setBirthDate(dpBirthDate.getValue());
             etudiant.setDateInscription(dpDateInscription.getValue());
-            etudiant.setClasseId(cbClasse.getValue().getId());
+            etudiant.setClasseId(selectedClasse.getId());
 
             etudiantService.ajouter(etudiant);
             refreshTable();
@@ -169,6 +175,12 @@ public class EtudiantController {
         }
 
         try {
+            Classe selectedClasse = cbClasse.getValue();
+            if (selectedClasse == null) {
+                alert("Erreur", "Veuillez sélectionner une classe.");
+                return;
+            }
+
             selected.setNom(txtNom.getText());
             selected.setPrenom(txtPrenom.getText());
             selected.setEmail(txtEmail.getText());
@@ -178,7 +190,7 @@ public class EtudiantController {
             selected.setPassword(txtPassword.getText());
             selected.setBirthDate(dpBirthDate.getValue());
             selected.setDateInscription(dpDateInscription.getValue());
-            selected.setClasseId(cbClasse.getValue().getId());
+            selected.setClasseId(selectedClasse.getId());
 
             etudiantService.modifier(selected);
             refreshTable();

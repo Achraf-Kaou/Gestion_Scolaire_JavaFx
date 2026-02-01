@@ -142,6 +142,12 @@ public class ClasseController {
         }
 
         try {
+            Specialite selectedSpecialite = cbSpecialite.getValue();
+            if (selectedSpecialite == null) {
+                alert("Erreur", "Veuillez sélectionner une spécialité.");
+                return;
+            }
+
             Classe classe = new Classe();
             classe.setCode(txtCode.getText());
             classe.setNom(txtNom.getText());
@@ -149,7 +155,7 @@ public class ClasseController {
             classe.setAnneeScolaire(txtAnneeScolaire.getText());
             classe.setTypeDiplome(cbTypeDiplome.getValue());
             classe.setNiveauAnnee(cbNiveauAnnee.getValue());
-            classe.setSpecialiteId(cbSpecialite.getValue().getId());
+            classe.setSpecialiteId(selectedSpecialite.getId());
 
             classeService.ajouter(classe);
             refreshTable();
@@ -174,13 +180,19 @@ public class ClasseController {
         }
 
         try {
+            Specialite selectedSpecialite = cbSpecialite.getValue();
+            if (selectedSpecialite == null) {
+                alert("Erreur", "Veuillez sélectionner une spécialité.");
+                return;
+            }
+
             selected.setCode(txtCode.getText());
             selected.setNom(txtNom.getText());
             selected.setCapaciteMax(Integer.parseInt(txtCapaciteMax.getText()));
             selected.setAnneeScolaire(txtAnneeScolaire.getText());
             selected.setTypeDiplome(cbTypeDiplome.getValue());
             selected.setNiveauAnnee(cbNiveauAnnee.getValue());
-            selected.setSpecialiteId(cbSpecialite.getValue().getId());
+            selected.setSpecialiteId(selectedSpecialite.getId());
 
             classeService.modifier(selected);
             refreshTable();
