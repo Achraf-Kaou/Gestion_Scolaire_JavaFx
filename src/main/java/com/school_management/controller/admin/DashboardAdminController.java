@@ -30,6 +30,9 @@ public class DashboardAdminController {
     private Button btnGestionClasses;
 
     @FXML
+    private Button btnGestionEmploiDuTemps;
+
+    @FXML
     private Button btnStatistiques;
 
     @FXML
@@ -43,6 +46,7 @@ public class DashboardAdminController {
         btnGestionEtudiants.setOnAction(e -> showGestionEtudiants());
         btnGestionEnseignants.setOnAction(e -> showGestionEnseignants());
         btnGestionClasses.setOnAction(e -> showGestionClasses());
+        btnGestionEmploiDuTemps.setOnAction(e -> showGestionEmploiDuTemps());
         btnStatistiques.setOnAction(e -> showStatistiques());
     }
 
@@ -70,6 +74,11 @@ public class DashboardAdminController {
     private void showGestionClasses() {
         contentArea.getChildren().clear();
         loadViewInContent("/com/school_management/Admin/ClasseView.fxml");
+    }
+
+    private void showGestionEmploiDuTemps() {
+        contentArea.getChildren().clear();
+        loadViewInContent("/com/school_management/Admin/EmploiDuTempsView.fxml");
     }
 
     private void showStatistiques() {
