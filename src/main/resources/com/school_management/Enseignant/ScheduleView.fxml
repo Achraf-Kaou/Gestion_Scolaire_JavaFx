@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.school_management.controller.enseignant.ScheduleController" spacing="15" style="-fx-padding: 20;">
+    <Label text="Mon Emploi du Temps" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />
+    <Separator />
+    
+    <TableView fx:id="scheduleTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="jourColumn" text="Jour" prefWidth="100" />
+            <TableColumn fx:id="heureDebutColumn" text="Heure Début" prefWidth="100" />
+            <TableColumn fx:id="heureFinColumn" text="Heure Fin" prefWidth="100" />
+            <TableColumn fx:id="matiereColumn" text="Matière" prefWidth="150" />
+            <TableColumn fx:id="classeColumn" text="Classe" prefWidth="100" />
+            <TableColumn fx:id="salleColumn" text="Salle" prefWidth="80" />
+            <TableColumn fx:id="nbEtudiantsColumn" text="Nb. Étudiants" prefWidth="120" />
+        </columns>
+    </TableView>
+</VBox>

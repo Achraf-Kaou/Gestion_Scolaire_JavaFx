@@ -1,5 +1,7 @@
 package com.school_management.controller;
 
+import com.school_management.controller.enseignant.DashboardEnseignantController;
+import com.school_management.controller.etudiant.DashboardEtudiantController;
 import com.school_management.exception.EmailNotFoundException;
 import com.school_management.exception.IncorrectPasswordException;
 import com.school_management.model.Enseignant;
@@ -49,9 +51,7 @@ public class LoginController {
 
             try {
                 Etudiant etu = etudiantService.seConnecter(email, password);
-                showInfo("Connexion réussie", "Bienvenue " + etu.getNom());
-
-                // TODO : Rediriger vers interface étudiant
+                openEtudiantDashboard(etu);
             } catch (EmailNotFoundException e) {
                 showError("Email incorrect", e.getMessage());
             } catch (IncorrectPasswordException e) {
@@ -73,9 +73,7 @@ public class LoginController {
                     return;
                 }
                 Enseignant ens = enseignantService.seConnecter(email, password);
-                showInfo("Connexion réussie", "Bienvenue " + ens.getNom());
-
-                // TODO : Rediriger vers interface étudiant
+                openEnseignantDashboard(ens);
             } catch (EmailNotFoundException e) {
                 showError("Email incorrect", e.getMessage());
             } catch (IncorrectPasswordException e) {
@@ -112,6 +110,40 @@ public class LoginController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void openEnseignantDashboard(Enseignant enseignant) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/school_management/Enseignant/DashboardEnseignant.fxml"));
+            Scene scene = new Scene(loader.load());
+            
+            DashboardEnseignantController controller = loader.getController();
+            controller.setEnseignant(enseignant);
+            
+            Stage stage = (Stage) tabPane.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showError("Erreur", "Impossible d'ouvrir le dashboard enseignant");
+        }
+    }
+
+    private void openEtudiantDashboard(Etudiant etudiant) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/school_management/Etudiant/DashboardEtudiant.fxml"));
+            Scene scene = new Scene(loader.load());
+            
+            DashboardEtudiantController controller = loader.getController();
+            controller.setEtudiant(etudiant);
+            
+            Stage stage = (Stage) tabPane.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showError("Erreur", "Impossible d'ouvrir le dashboard étudiant");
         }
     }
 

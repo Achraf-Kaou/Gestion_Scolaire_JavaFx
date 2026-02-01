@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.school_management.controller.enseignant.DashboardEnseignantController" prefWidth="900" prefHeight="700">
+    <top>
+        <HBox spacing="10" style="-fx-background-color: #2C3E50; -fx-padding: 15;">
+            <Label fx:id="welcomeLabel" text="Dashboard Enseignant" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="Déconnexion" fx:id="btnLogout" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" />
+        </HBox>
+    </top>
+    <left>
+        <VBox spacing="15" style="-fx-background-color: #34495E; -fx-padding: 15;" prefWidth="200">
+            <Button text="Mon Profil" fx:id="btnProfile" maxWidth="Infinity" style="-fx-background-color: #3498DB; -fx-text-fill: white;" />
+            <Button text="Mon Emploi du Temps" fx:id="btnSchedule" maxWidth="Infinity" style="-fx-background-color: #3498DB; -fx-text-fill: white;" />
+            <Button text="Mes Étudiants" fx:id="btnStudents" maxWidth="Infinity" style="-fx-background-color: #3498DB; -fx-text-fill: white;" />
+        </VBox>
+    </left>
+    <center>
+        <VBox fx:id="contentArea" spacing="10" style="-fx-padding: 20;">
+            <Label text="Bienvenue dans votre espace enseignant" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+            <!-- Zone de contenu dynamique -->
+        </VBox>
+    </center>
+</BorderPane>
