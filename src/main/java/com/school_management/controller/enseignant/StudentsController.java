@@ -52,13 +52,8 @@ public class StudentsController {
         nomColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNom()));
         prenomColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPrenom()));
         classeColumn.setCellValueFactory(data -> {
-            try {
-                if (data.getValue().getClasseId() != null) {
-                    Classe classe = classeService.lireParId(data.getValue().getClasseId());
-                    return new SimpleStringProperty(classe != null ? classe.getNom() : "N/A");
-                }
-            } catch (SQLException | IOException e) {
-                e.printStackTrace();
+            if (data.getValue().getClasse() != null) {
+                return new SimpleStringProperty(data.getValue().getClasse().getNom());
             }
             return new SimpleStringProperty("N/A");
         });
@@ -89,6 +84,11 @@ public class StudentsController {
             Set<Etudiant> allStudents = new HashSet<>();
             for (Long classeId : classeIds) {
                 List<Etudiant> etudiants = etudiantService.lireParClasse(classeId);
+                // Pre-load classe for each student
+                Classe classe = classeService.lireParId(classeId);
+                for (Etudiant etudiant : etudiants) {
+                    etudiant.setClasse(classe);
+                }
                 allStudents.addAll(etudiants);
             }
             

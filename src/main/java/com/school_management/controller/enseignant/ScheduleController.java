@@ -55,25 +55,15 @@ public class ScheduleController {
         matiereColumn.setCellValueFactory(data -> 
             new SimpleStringProperty(data.getValue().getMatiere() != null ? data.getValue().getMatiere().getNom() : "N/A"));
         classeColumn.setCellValueFactory(data -> {
-            try {
-                if (data.getValue().getEmploiDuTemps() != null && data.getValue().getEmploiDuTemps().getClasseId() != null) {
-                    Classe classe = classeService.lireParId(data.getValue().getEmploiDuTemps().getClasseId());
-                    return new SimpleStringProperty(classe != null ? classe.getNom() : "N/A");
-                }
-            } catch (SQLException | IOException e) {
-                e.printStackTrace();
+            if (data.getValue().getEmploiDuTemps() != null && data.getValue().getEmploiDuTemps().getClasse() != null) {
+                return new SimpleStringProperty(data.getValue().getEmploiDuTemps().getClasse().getNom());
             }
             return new SimpleStringProperty("N/A");
         });
         salleColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSalle()));
         nbEtudiantsColumn.setCellValueFactory(data -> {
-            try {
-                if (data.getValue().getEmploiDuTemps() != null && data.getValue().getEmploiDuTemps().getClasseId() != null) {
-                    Classe classe = classeService.lireParId(data.getValue().getEmploiDuTemps().getClasseId());
-                    return new SimpleIntegerProperty(classe != null ? classe.getEffectif() : 0);
-                }
-            } catch (SQLException | IOException e) {
-                e.printStackTrace();
+            if (data.getValue().getEmploiDuTemps() != null && data.getValue().getEmploiDuTemps().getClasse() != null) {
+                return new SimpleIntegerProperty(data.getValue().getEmploiDuTemps().getClasse().getEffectif());
             }
             return new SimpleIntegerProperty(0);
         });
@@ -88,6 +78,15 @@ public class ScheduleController {
     private void loadSchedule(Long enseignantId) {
         try {
             List<Seance> seances = seanceService.lireParEnseignant(enseignantId);
+            
+            // Pre-load all classes to avoid N+1 queries
+            for (Seance seance : seances) {
+                if (seance.getEmploiDuTemps() != null && seance.getEmploiDuTemps().getClasseId() != null) {
+                    Classe classe = classeService.lireParId(seance.getEmploiDuTemps().getClasseId());
+                    seance.getEmploiDuTemps().setClasse(classe);
+                }
+            }
+            
             ObservableList<Seance> seanceList = FXCollections.observableArrayList(seances);
             scheduleTable.setItems(seanceList);
         } catch (SQLException | IOException e) {
