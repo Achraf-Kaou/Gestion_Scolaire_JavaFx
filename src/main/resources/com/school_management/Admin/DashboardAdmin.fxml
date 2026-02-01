@@ -19,6 +19,7 @@
             <Button text="Gestion Enseignants" fx:id="btnGestionEnseignants" maxWidth="Infinity" />
             <Button text="Gestion Classes" fx:id="btnGestionClasses" maxWidth="Infinity" />
             <Button text="Gestion Emploi du Temps" fx:id="btnGestionEmploiDuTemps" maxWidth="Infinity" />
+            <Button text="Gestion Séances" fx:id="btnGestionSeances" maxWidth="Infinity" />
             <Button text="Statistiques" fx:id="btnStatistiques" maxWidth="Infinity" />
         </VBox>
     </left>

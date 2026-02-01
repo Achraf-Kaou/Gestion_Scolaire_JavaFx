@@ -12,6 +12,14 @@
 
     <Label text="Gestion des spécialités" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
 
+    <Label text="💡 Comment assigner des matières à une spécialité:" style="-fx-font-size: 12px; -fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+    <VBox spacing="5" style="-fx-background-color: #ecf0f1; -fx-padding: 10; -fx-background-radius: 5;">
+        <Label text="1. Sélectionnez une ou plusieurs matières dans le tableau 'Matières associées' (utilisez Ctrl+Clic pour sélectionner plusieurs matières)"/>
+        <Label text="2. Remplissez les champs 'Code' et 'Nom' de la spécialité"/>
+        <Label text="3. Cliquez sur 'Ajouter' pour créer une nouvelle spécialité avec les matières sélectionnées"/>
+        <Label text="4. Pour modifier, sélectionnez une spécialité dans le tableau du bas, modifiez les matières sélectionnées, puis cliquez sur 'Modifier'"/>
+    </VBox>
+
     <HBox spacing="10">
         <Label text="Code:"/>
         <TextField fx:id="txtCode" promptText="Code spécialité" prefWidth="120"/>
