@@ -208,7 +208,8 @@ public class ScheduleDisplayController {
         timeLabel.setStyle("-fx-text-fill: white; -fx-font-size: 10px;");
 
         Label enseignantLabel = new Label(
-            seance.getEnseignant() != null ? 
+            seance.getEnseignant() != null && seance.getEnseignant().getNom() != null && 
+            seance.getEnseignant().getPrenom() != null && !seance.getEnseignant().getPrenom().isEmpty() ? 
             seance.getEnseignant().getNom() + " " + seance.getEnseignant().getPrenom().charAt(0) + "." : ""
         );
         enseignantLabel.setStyle("-fx-text-fill: white; -fx-font-size: 10px;");

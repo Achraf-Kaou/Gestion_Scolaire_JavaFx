@@ -70,7 +70,7 @@ L'association entre matières et spécialités est déjà implémentée dans la 
 **Comment assigner des matières à une spécialité:**
 
 1. **Accéder à la gestion des spécialités:**
-   - Cliquez sur "Gestion specialites" dans le menu latéral
+   - Cliquez sur "Gestion spécialités" dans le menu latéral
 
 2. **Pour créer une nouvelle spécialité avec des matières:**
    - Dans le tableau "Matières associées" (en haut), sélectionnez une ou plusieurs matières
