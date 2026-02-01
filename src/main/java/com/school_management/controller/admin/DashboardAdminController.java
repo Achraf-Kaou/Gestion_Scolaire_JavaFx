@@ -33,6 +33,9 @@ public class DashboardAdminController {
     private Button btnGestionEmploiDuTemps;
 
     @FXML
+    private Button btnGestionSeances;
+
+    @FXML
     private Button btnStatistiques;
 
     @FXML
@@ -47,7 +50,11 @@ public class DashboardAdminController {
         btnGestionEnseignants.setOnAction(e -> showGestionEnseignants());
         btnGestionClasses.setOnAction(e -> showGestionClasses());
         btnGestionEmploiDuTemps.setOnAction(e -> showGestionEmploiDuTemps());
+        btnGestionSeances.setOnAction(e -> showGestionSeances());
         btnStatistiques.setOnAction(e -> showStatistiques());
+        
+        // Show dashboard summary by default
+        showDashboardSummary();
     }
 
     private void handleLogout() {
@@ -81,13 +88,24 @@ public class DashboardAdminController {
         loadViewInContent("/com/school_management/Admin/EmploiDuTempsView.fxml");
     }
 
+    private void showGestionSeances() {
+        contentArea.getChildren().clear();
+        loadViewInContent("/com/school_management/Admin/SeanceView.fxml");
+    }
+
     private void showStatistiques() {
         contentArea.getChildren().clear();
-        contentArea.getChildren().add(new Label("Interface statistiques (à implémenter)"));
+        loadViewInContent("/com/school_management/Admin/StatistiqueView.fxml");
     }
 
     private void showGestionSpecialites() {
+        contentArea.getChildren().clear();
         loadViewInContent("/com/school_management/Admin/SpecialiteView.fxml");
+    }
+
+    private void showDashboardSummary() {
+        contentArea.getChildren().clear();
+        loadViewInContent("/com/school_management/Admin/DashboardSummaryView.fxml");
     }
 
     private void loadViewInContent(String fxmlPath) {

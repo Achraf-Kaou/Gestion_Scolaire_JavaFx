@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.school_management.controller.admin.DashboardSummaryController"
+      spacing="20" style="-fx-background-color: #ecf0f1;">
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <Label text="Tableau de Bord - Vue d'Ensemble" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+    
+    <Label text="Bienvenue dans le système de gestion scolaire" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" />
+
+    <Separator/>
+
+    <GridPane hgap="20" vgap="20">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50"/>
+            <ColumnConstraints percentWidth="50"/>
+        </columnConstraints>
+        
+        <!-- Card 1: Étudiants -->
+        <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" 
+              style="-fx-background-color: #3498db; -fx-background-radius: 10; -fx-padding: 20;" 
+              spacing="10">
+            <Label text="Étudiants" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label fx:id="lblNbEtudiants" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label text="Total d'étudiants inscrits" style="-fx-font-size: 12px; -fx-text-fill: #ecf0f1;" />
+        </VBox>
+        
+        <!-- Card 2: Enseignants -->
+        <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" 
+              style="-fx-background-color: #2ecc71; -fx-background-radius: 10; -fx-padding: 20;" 
+              spacing="10">
+            <Label text="Enseignants" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label fx:id="lblNbEnseignants" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label text="Total d'enseignants actifs" style="-fx-font-size: 12px; -fx-text-fill: #ecf0f1;" />
+        </VBox>
+        
+        <!-- Card 3: Classes -->
+        <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" 
+              style="-fx-background-color: #e74c3c; -fx-background-radius: 10; -fx-padding: 20;" 
+              spacing="10">
+            <Label text="Classes" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label fx:id="lblNbClasses" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label text="Total de classes" style="-fx-font-size: 12px; -fx-text-fill: #ecf0f1;" />
+        </VBox>
+        
+        <!-- Card 4: Matières -->
+        <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" 
+              style="-fx-background-color: #f39c12; -fx-background-radius: 10; -fx-padding: 20;" 
+              spacing="10">
+            <Label text="Matières" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label fx:id="lblNbMatieres" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label text="Total de matières disponibles" style="-fx-font-size: 12px; -fx-text-fill: #ecf0f1;" />
+        </VBox>
+        
+        <!-- Card 5: Spécialités -->
+        <VBox GridPane.columnIndex="0" GridPane.rowIndex="2" 
+              style="-fx-background-color: #9b59b6; -fx-background-radius: 10; -fx-padding: 20;" 
+              spacing="10">
+            <Label text="Spécialités" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label fx:id="lblNbSpecialites" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label text="Total de spécialités" style="-fx-font-size: 12px; -fx-text-fill: #ecf0f1;" />
+        </VBox>
+        
+        <!-- Card 6: Séances -->
+        <VBox GridPane.columnIndex="1" GridPane.rowIndex="2" 
+              style="-fx-background-color: #1abc9c; -fx-background-radius: 10; -fx-padding: 20;" 
+              spacing="10">
+            <Label text="Séances" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label fx:id="lblNbSeances" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label text="Total de séances programmées" style="-fx-font-size: 12px; -fx-text-fill: #ecf0f1;" />
+        </VBox>
+        
+        <!-- Card 7: Emplois du Temps -->
+        <VBox GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2"
+              style="-fx-background-color: #34495e; -fx-background-radius: 10; -fx-padding: 20;" 
+              spacing="10">
+            <Label text="Emplois du Temps" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label fx:id="lblNbEmploisDuTemps" text="0" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label text="Total d'emplois du temps créés" style="-fx-font-size: 12px; -fx-text-fill: #ecf0f1;" />
+        </VBox>
+    </GridPane>
+</VBox>

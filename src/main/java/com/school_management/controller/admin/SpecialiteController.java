@@ -14,6 +14,16 @@ import javafx.scene.control.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Contrôleur pour la gestion des spécialités et l'association avec les matières.
+ * 
+ * COMMENT ASSIGNER DES MATIÈRES À UNE SPÉCIALITÉ:
+ * 1. Sélectionnez une ou plusieurs matières dans le tableau 'matieresTable'
+ *    (Utilisez Ctrl+Clic pour sélectionner plusieurs matières)
+ * 2. Remplissez les champs Code et Nom de la spécialité
+ * 3. Cliquez sur 'Ajouter' pour créer une nouvelle spécialité avec les matières sélectionnées
+ * 4. Pour modifier: sélectionnez une spécialité, modifiez les matières, puis cliquez sur 'Modifier'
+ */
 public class SpecialiteController {
 
     @FXML private TextField txtCode;

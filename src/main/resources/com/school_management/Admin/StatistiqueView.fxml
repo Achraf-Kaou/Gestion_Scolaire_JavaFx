@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.school_management.controller.admin.StatistiqueController"
+      spacing="20">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Statistiques et Analyses" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+    <!-- Statistics Summary -->
+    <HBox spacing="20">
+        <VBox spacing="5" style="-fx-background-color: #3498db; -fx-background-radius: 8; -fx-padding: 15;" HBox.hgrow="ALWAYS">
+            <Label text="Étudiants" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+            <Label fx:id="lblNbEtudiants" text="0" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+        </VBox>
+        
+        <VBox spacing="5" style="-fx-background-color: #2ecc71; -fx-background-radius: 8; -fx-padding: 15;" HBox.hgrow="ALWAYS">
+            <Label text="Enseignants" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+            <Label fx:id="lblNbEnseignants" text="0" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+        </VBox>
+        
+        <VBox spacing="5" style="-fx-background-color: #e74c3c; -fx-background-radius: 8; -fx-padding: 15;" HBox.hgrow="ALWAYS">
+            <Label text="Classes" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+            <Label fx:id="lblNbClasses" text="0" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+        </VBox>
+        
+        <VBox spacing="5" style="-fx-background-color: #f39c12; -fx-background-radius: 8; -fx-padding: 15;" HBox.hgrow="ALWAYS">
+            <Label text="Matières" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+            <Label fx:id="lblNbMatieres" text="0" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+        </VBox>
+        
+        <VBox spacing="5" style="-fx-background-color: #9b59b6; -fx-background-radius: 8; -fx-padding: 15;" HBox.hgrow="ALWAYS">
+            <Label text="Séances" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+            <Label fx:id="lblNbSeances" text="0" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+        </VBox>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Charts -->
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        <!-- Pie Chart: Students by Class -->
+        <VBox spacing="10" HBox.hgrow="ALWAYS">
+            <Label text="Distribution des Étudiants par Classe" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+            <PieChart fx:id="pieChartEtudiants" title="Étudiants par Classe" prefHeight="300" legendVisible="true"/>
+        </VBox>
+        
+        <!-- Bar Chart: Sessions by Subject -->
+        <VBox spacing="10" HBox.hgrow="ALWAYS">
+            <Label text="Nombre de Séances par Matière" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+            <BarChart fx:id="barChartMatieres" title="Séances par Matière" prefHeight="300">
+                <xAxis>
+                    <CategoryAxis fx:id="xAxis" label="Matières" side="BOTTOM"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="yAxis" label="Nombre de séances" side="LEFT"/>
+                </yAxis>
+            </BarChart>
+        </VBox>
+    </HBox>
+
+    <Label text="Note: Les statistiques sont calculées en temps réel à partir de la base de données." 
+           style="-fx-font-style: italic; -fx-text-fill: #7f8c8d; -fx-font-size: 11px;"/>
+</VBox>
