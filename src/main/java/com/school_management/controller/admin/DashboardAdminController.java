@@ -59,17 +59,17 @@ public class DashboardAdminController {
 
     private void showGestionEtudiants() {
         contentArea.getChildren().clear();
-        contentArea.getChildren().add(new Label("Interface gestion des étudiants (à implémenter)"));
+        loadViewInContent("/com/school_management/Admin/EtudiantView.fxml");
     }
 
     private void showGestionEnseignants() {
         contentArea.getChildren().clear();
-        contentArea.getChildren().add(new Label("Interface gestion des enseignants (à implémenter)"));
+        loadViewInContent("/com/school_management/Admin/EnseignantView.fxml");
     }
 
     private void showGestionClasses() {
         contentArea.getChildren().clear();
-        contentArea.getChildren().add(new Label("Interface gestion des classes (à implémenter)"));
+        loadViewInContent("/com/school_management/Admin/ClasseView.fxml");
     }
 
     private void showStatistiques() {
