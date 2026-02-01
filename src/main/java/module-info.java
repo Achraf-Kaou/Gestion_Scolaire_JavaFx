@@ -15,7 +15,17 @@ module com.school_management.school_management {
     requires jdk.jdi;
 
     opens com.school_management to javafx.fxml;
+    opens com.school_management.controller to javafx.fxml;
+
     opens database;
     opens database.etudiant;
+    opens database.enseignant;
+    opens database.specialite;
+    opens database.matiere;
+
     exports com.school_management;
+    exports com.school_management.controller;
+    exports com.school_management.controller.admin;
+    opens com.school_management.controller.admin to javafx.fxml;
+
 }

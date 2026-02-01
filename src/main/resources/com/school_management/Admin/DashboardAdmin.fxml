@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.school_management.controller.admin.DashboardAdminController" prefWidth="800" prefHeight="600">
+    <top>
+        <HBox spacing="10" style="-fx-background-color: #2C3E50;">
+            <Label text="Dashboard Admin" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+            <Button text="Déconnexion" fx:id="btnLogout" style="-fx-background-color: #E74C3C; -fx-text-fill: white;" />
+        </HBox>
+    </top>
+    <left>
+        <VBox spacing="15" style="-fx-background-color: #34495E;" prefWidth="200">
+            <Button text="Gestion specialites" fx:id="btnGestionSpecialites" maxWidth="Infinity" />
+            <Button text="Gestion matieres" fx:id="btnGestionMatieres" maxWidth="Infinity" />
+            <Button text="Gestion Etudiants" fx:id="btnGestionEtudiants" maxWidth="Infinity" />
+            <Button text="Gestion Enseignants" fx:id="btnGestionEnseignants" maxWidth="Infinity" />
+            <Button text="Gestion Classes" fx:id="btnGestionClasses" maxWidth="Infinity" />
+            <Button text="Statistiques" fx:id="btnStatistiques" maxWidth="Infinity" />
+        </VBox>
+    </left>
+    <center>
+        <VBox fx:id="contentArea" spacing="10">
+            <Label text="Bienvenue dans le tableau de bord administrateur" />
+            <!-- Zone de contenu dynamique -->
+        </VBox>
+    </center>
+</BorderPane>

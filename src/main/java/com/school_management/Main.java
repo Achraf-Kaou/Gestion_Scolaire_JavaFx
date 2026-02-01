@@ -19,7 +19,7 @@ public class Main extends Application {
         // Établir la connexion au démarrage
         connection = DatabaseConfig.getConnection();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("LoginView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 500);
         stage.setTitle("Gestion Scolaire");
         stage.setScene(scene);

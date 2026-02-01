@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.school_management.controller.admin.SpecialiteController"
+      spacing="15">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Gestion des spécialités" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+    <HBox spacing="10">
+        <Label text="Code:"/>
+        <TextField fx:id="txtCode" promptText="Code spécialité" prefWidth="120"/>
+        <Label text="Nom:"/>
+        <TextField fx:id="txtNom" promptText="Nom spécialité" prefWidth="180"/>
+        <Button text="Ajouter" fx:id="btnAjouter"/>
+        <Button text="Modifier" fx:id="btnModifier"/>
+        <Button text="Supprimer" fx:id="btnSupprimer"/>
+    </HBox>
+
+    <Label text="Matières associées :" style="-fx-font-weight: bold;"/>
+    <TableView fx:id="matieresTable" prefHeight="140">
+        <columns>
+            <TableColumn fx:id="colMatId" text="ID" prefWidth="70"/>
+            <TableColumn fx:id="colMatCode" text="Code" prefWidth="100"/>
+            <TableColumn fx:id="colMatNom" text="Nom" prefWidth="160"/>
+        </columns>
+    </TableView>
+
+    <TableView fx:id="table" prefHeight="300" style="-fx-background-color: #f6f6f6;">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="60" />
+            <TableColumn fx:id="colCode" text="Code" prefWidth="120" />
+            <TableColumn fx:id="colNom" text="Nom" prefWidth="180" />
+        </columns>
+    </TableView>
+</VBox>
