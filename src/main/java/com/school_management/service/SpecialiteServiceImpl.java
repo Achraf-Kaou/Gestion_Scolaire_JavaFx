@@ -9,6 +9,7 @@ import com.school_management.model.Specialite;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -39,7 +40,14 @@ public class SpecialiteServiceImpl implements SpecialiteService{
 
     @Override
     public List<Specialite> listeSpecialites() throws SQLException, IOException {
-        return specialiteDAO.lireTous();
+        List<Specialite> specialites = specialiteDAO.lireTous();
+        // Load associated matieres for each specialite
+        MatiereService matiereService = new MatiereServiceImpl();
+        for (Specialite specialite : specialites) {
+            List<Matiere> matieres = matiereService.listeMatieresParSpecilite(specialite.getId());
+            specialite.setMatieres(new java.util.HashSet<>(matieres));
+        }
+        return specialites;
     }
 
     @Override
