@@ -6,7 +6,14 @@ import java.time.Duration;
 /**
  * Utility class for schedule-related calculations
  */
-public class ScheduleUtils {
+public final class ScheduleUtils {
+    
+    /**
+     * Private constructor to prevent instantiation
+     */
+    private ScheduleUtils() {
+        throw new UnsupportedOperationException("Utility class cannot be instantiated");
+    }
     
     /**
      * Base height per hour in pixels for schedule blocks
