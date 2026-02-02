@@ -42,6 +42,7 @@ public class ClasseController {
     private final SpecialiteService specialiteService = new SpecialiteServiceImpl();
     private final ObservableList<Classe> classes = FXCollections.observableArrayList();
     private final ObservableList<Specialite> specialites = FXCollections.observableArrayList();
+    private List<Classe> allClasses = new java.util.ArrayList<>();  // Cache for search filtering
 
     @FXML
     public void initialize() {
@@ -134,6 +135,7 @@ public class ClasseController {
                     classe.setSpecialite(specialite);
                 }
             }
+            allClasses = classeList;  // Cache the full list
             classes.setAll(classeList);
             // Apply current search filter if any
             if (txtSearch != null && !txtSearch.getText().isEmpty()) {
@@ -145,30 +147,17 @@ public class ClasseController {
     }
 
     private void filterTable(String searchText) {
-        try {
-            List<Classe> classeList = classeService.lireTous();
-            // Load the specialite for each classe
-            for (Classe classe : classeList) {
-                if (classe.getSpecialiteId() != null) {
-                    Specialite specialite = specialiteService.listeSpecialitesId(classe.getSpecialiteId());
-                    classe.setSpecialite(specialite);
-                }
-            }
-            
-            if (searchText == null || searchText.trim().isEmpty()) {
-                classes.setAll(classeList);
-            } else {
-                String search = searchText.toLowerCase().trim();
-                List<Classe> filtered = classeList.stream()
-                    .filter(c -> 
-                        (c.getCode() != null && c.getCode().toLowerCase().contains(search)) ||
-                        (c.getNom() != null && c.getNom().toLowerCase().contains(search))
-                    )
-                    .toList();
-                classes.setAll(filtered);
-            }
-        } catch (Exception e) {
-            alert("Erreur", "Impossible de filtrer les classes :\n" + e.getMessage());
+        if (searchText == null || searchText.trim().isEmpty()) {
+            classes.setAll(allClasses);
+        } else {
+            String search = searchText.toLowerCase().trim();
+            List<Classe> filtered = allClasses.stream()
+                .filter(c -> 
+                    (c.getCode() != null && c.getCode().toLowerCase().contains(search)) ||
+                    (c.getNom() != null && c.getNom().toLowerCase().contains(search))
+                )
+                .toList();
+            classes.setAll(filtered);
         }
     }
 

@@ -209,7 +209,7 @@ public class ScheduleController {
             LocalTime slotTime = LocalTime.parse(heures[i], timeFormatter);
             LocalTime nextSlotTime = LocalTime.parse(heures[i + 1], timeFormatter);
             
-            if (targetTime.isAfter(slotTime) && targetTime.isBefore(nextSlotTime)) {
+            if (!targetTime.isBefore(slotTime) && targetTime.isBefore(nextSlotTime)) {
                 return i;
             }
         }

@@ -43,6 +43,7 @@ public class EtudiantController {
     private final ClasseService classeService = new ClasseServiceImpl();
     private final ObservableList<Etudiant> etudiants = FXCollections.observableArrayList();
     private final ObservableList<Classe> classes = FXCollections.observableArrayList();
+    private List<Etudiant> allEtudiants = new java.util.ArrayList<>();  // Cache for search filtering
 
     @FXML
     public void initialize() {
@@ -128,6 +129,7 @@ public class EtudiantController {
                     etudiant.setClasse(classe);
                 }
             }
+            allEtudiants = etudiantList;  // Cache the full list
             etudiants.setAll(etudiantList);
             // Apply current search filter if any
             if (txtSearch != null && !txtSearch.getText().isEmpty()) {
@@ -139,32 +141,19 @@ public class EtudiantController {
     }
 
     private void filterTable(String searchText) {
-        try {
-            List<Etudiant> etudiantList = etudiantService.lireTous();
-            // Load the classe for each etudiant
-            for (Etudiant etudiant : etudiantList) {
-                if (etudiant.getClasseId() != null) {
-                    Classe classe = classeService.lireParId(etudiant.getClasseId());
-                    etudiant.setClasse(classe);
-                }
-            }
-            
-            if (searchText == null || searchText.trim().isEmpty()) {
-                etudiants.setAll(etudiantList);
-            } else {
-                String search = searchText.toLowerCase().trim();
-                List<Etudiant> filtered = etudiantList.stream()
-                    .filter(e -> 
-                        (e.getNom() != null && e.getNom().toLowerCase().contains(search)) ||
-                        (e.getPrenom() != null && e.getPrenom().toLowerCase().contains(search)) ||
-                        (e.getEmail() != null && e.getEmail().toLowerCase().contains(search)) ||
-                        (e.getNumeroEtudiant() != null && e.getNumeroEtudiant().toLowerCase().contains(search))
-                    )
-                    .toList();
-                etudiants.setAll(filtered);
-            }
-        } catch (Exception e) {
-            alert("Erreur", "Impossible de filtrer les étudiants :\n" + e.getMessage());
+        if (searchText == null || searchText.trim().isEmpty()) {
+            etudiants.setAll(allEtudiants);
+        } else {
+            String search = searchText.toLowerCase().trim();
+            List<Etudiant> filtered = allEtudiants.stream()
+                .filter(e -> 
+                    (e.getNom() != null && e.getNom().toLowerCase().contains(search)) ||
+                    (e.getPrenom() != null && e.getPrenom().toLowerCase().contains(search)) ||
+                    (e.getEmail() != null && e.getEmail().toLowerCase().contains(search)) ||
+                    (e.getNumeroEtudiant() != null && e.getNumeroEtudiant().toLowerCase().contains(search))
+                )
+                .toList();
+            etudiants.setAll(filtered);
         }
     }
 

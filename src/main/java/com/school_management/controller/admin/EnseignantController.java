@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class EnseignantController {
 
@@ -39,6 +40,7 @@ public class EnseignantController {
 
     private final EnseignantService enseignantService = new EnseignantServiceImpl();
     private final ObservableList<Enseignant> enseignants = FXCollections.observableArrayList();
+    private List<Enseignant> allEnseignants = new java.util.ArrayList<>();  // Cache for search filtering
 
     @FXML
     public void initialize() {
@@ -82,7 +84,8 @@ public class EnseignantController {
 
     private void refreshTable() {
         try {
-            enseignants.setAll(enseignantService.lireTous());
+            allEnseignants = enseignantService.lireTous();  // Cache the full list
+            enseignants.setAll(allEnseignants);
             // Apply current search filter if any
             if (txtSearch != null && !txtSearch.getText().isEmpty()) {
                 filterTable(txtSearch.getText());
@@ -93,25 +96,19 @@ public class EnseignantController {
     }
 
     private void filterTable(String searchText) {
-        try {
-            var enseignantList = enseignantService.lireTous();
-            
-            if (searchText == null || searchText.trim().isEmpty()) {
-                enseignants.setAll(enseignantList);
-            } else {
-                String search = searchText.toLowerCase().trim();
-                var filtered = enseignantList.stream()
-                    .filter(e -> 
-                        (e.getNom() != null && e.getNom().toLowerCase().contains(search)) ||
-                        (e.getPrenom() != null && e.getPrenom().toLowerCase().contains(search)) ||
-                        (e.getEmail() != null && e.getEmail().toLowerCase().contains(search)) ||
-                        (e.getNumeroEnseignant() != null && e.getNumeroEnseignant().toLowerCase().contains(search))
-                    )
-                    .toList();
-                enseignants.setAll(filtered);
-            }
-        } catch (Exception e) {
-            alert("Erreur", "Impossible de filtrer les enseignants :\n" + e.getMessage());
+        if (searchText == null || searchText.trim().isEmpty()) {
+            enseignants.setAll(allEnseignants);
+        } else {
+            String search = searchText.toLowerCase().trim();
+            var filtered = allEnseignants.stream()
+                .filter(e -> 
+                    (e.getNom() != null && e.getNom().toLowerCase().contains(search)) ||
+                    (e.getPrenom() != null && e.getPrenom().toLowerCase().contains(search)) ||
+                    (e.getEmail() != null && e.getEmail().toLowerCase().contains(search)) ||
+                    (e.getNumeroEnseignant() != null && e.getNumeroEnseignant().toLowerCase().contains(search))
+                )
+                .toList();
+            enseignants.setAll(filtered);
         }
     }
 
