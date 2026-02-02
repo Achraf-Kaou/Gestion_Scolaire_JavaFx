@@ -80,22 +80,22 @@ public class ScheduleDisplayController {
         scheduleGrid.getColumnConstraints().clear();
         scheduleGrid.getRowConstraints().clear();
 
-        // Add column constraints
-        ColumnConstraints timeColumn = new ColumnConstraints();
-        timeColumn.setMinWidth(80);
-        timeColumn.setPrefWidth(80);
-        scheduleGrid.getColumnConstraints().add(timeColumn);
+        // Add column constraints - now hours are columns
+        ColumnConstraints dayColumn = new ColumnConstraints();
+        dayColumn.setMinWidth(100);
+        dayColumn.setPrefWidth(100);
+        scheduleGrid.getColumnConstraints().add(dayColumn);
         
-        for (int i = 0; i < jours.length; i++) {
+        for (int i = 0; i < heures.length; i++) {
             ColumnConstraints cc = new ColumnConstraints();
             cc.setMinWidth(120);
-            cc.setPrefWidth(150);
+            cc.setPrefWidth(120);
             cc.setHgrow(Priority.ALWAYS);
             scheduleGrid.getColumnConstraints().add(cc);
         }
 
-        // Add row constraints
-        for (int i = 0; i <= heures.length; i++) {
+        // Add row constraints - now days are rows
+        for (int i = 0; i <= jours.length; i++) {
             RowConstraints rc = new RowConstraints();
             rc.setMinHeight(60);
             rc.setPrefHeight(60);
@@ -103,40 +103,41 @@ public class ScheduleDisplayController {
             scheduleGrid.getRowConstraints().add(rc);
         }
 
-        // Add header row with days
-        Label timeHeader = new Label("Heure");
-        timeHeader.setStyle("-fx-font-weight: bold; -fx-background-color: #34495e; -fx-text-fill: white; -fx-alignment: center;");
-        timeHeader.setMaxWidth(Double.MAX_VALUE);
-        timeHeader.setMaxHeight(Double.MAX_VALUE);
-        timeHeader.setAlignment(Pos.CENTER);
-        GridPane.setFillWidth(timeHeader, true);
-        GridPane.setFillHeight(timeHeader, true);
-        scheduleGrid.add(timeHeader, 0, 0);
+        // Add header corner cell
+        Label cornerHeader = new Label("Jour");
+        cornerHeader.setStyle("-fx-font-weight: bold; -fx-background-color: #34495e; -fx-text-fill: white; -fx-alignment: center;");
+        cornerHeader.setMaxWidth(Double.MAX_VALUE);
+        cornerHeader.setMaxHeight(Double.MAX_VALUE);
+        cornerHeader.setAlignment(Pos.CENTER);
+        GridPane.setFillWidth(cornerHeader, true);
+        GridPane.setFillHeight(cornerHeader, true);
+        scheduleGrid.add(cornerHeader, 0, 0);
 
+        // Add header row with hours (horizontal)
+        for (int i = 0; i < heures.length; i++) {
+            Label hourLabel = new Label(heures[i]);
+            hourLabel.setStyle("-fx-font-weight: bold; -fx-background-color: #3498db; -fx-text-fill: white; -fx-alignment: center;");
+            hourLabel.setMaxWidth(Double.MAX_VALUE);
+            hourLabel.setMaxHeight(Double.MAX_VALUE);
+            hourLabel.setAlignment(Pos.CENTER);
+            GridPane.setFillWidth(hourLabel, true);
+            GridPane.setFillHeight(hourLabel, true);
+            scheduleGrid.add(hourLabel, i + 1, 0);
+        }
+
+        // Add day rows (vertical)
         for (int i = 0; i < jours.length; i++) {
             Label dayLabel = new Label(jours[i]);
-            dayLabel.setStyle("-fx-font-weight: bold; -fx-background-color: #3498db; -fx-text-fill: white; -fx-alignment: center;");
+            dayLabel.setStyle("-fx-background-color: #ecf0f1; -fx-alignment: center; -fx-font-weight: bold;");
             dayLabel.setMaxWidth(Double.MAX_VALUE);
             dayLabel.setMaxHeight(Double.MAX_VALUE);
             dayLabel.setAlignment(Pos.CENTER);
             GridPane.setFillWidth(dayLabel, true);
             GridPane.setFillHeight(dayLabel, true);
-            scheduleGrid.add(dayLabel, i + 1, 0);
-        }
+            scheduleGrid.add(dayLabel, 0, i + 1);
 
-        // Add time slots
-        for (int i = 0; i < heures.length; i++) {
-            Label timeLabel = new Label(heures[i]);
-            timeLabel.setStyle("-fx-background-color: #ecf0f1; -fx-alignment: center; -fx-font-weight: bold;");
-            timeLabel.setMaxWidth(Double.MAX_VALUE);
-            timeLabel.setMaxHeight(Double.MAX_VALUE);
-            timeLabel.setAlignment(Pos.CENTER);
-            GridPane.setFillWidth(timeLabel, true);
-            GridPane.setFillHeight(timeLabel, true);
-            scheduleGrid.add(timeLabel, 0, i + 1);
-
-            // Add empty cells for each day
-            for (int j = 0; j < jours.length; j++) {
+            // Add empty cells for each hour
+            for (int j = 0; j < heures.length; j++) {
                 Label emptyCell = new Label("");
                 emptyCell.setStyle("-fx-background-color: white; -fx-border-color: #bdc3c7; -fx-border-width: 1;");
                 emptyCell.setMaxWidth(Double.MAX_VALUE);
@@ -174,14 +175,15 @@ public class ScheduleDisplayController {
                 }
             }
 
-            // Place seances in the grid
+            // Place seances in the grid - now column is hour, row is day
             for (Seance seance : seances) {
                 int dayIndex = getDayIndex(seance.getJour());
                 int timeIndex = getTimeIndex(seance.getHeureDebut());
                 
                 if (dayIndex >= 0 && timeIndex >= 0) {
                     VBox seanceBox = createSeanceBox(seance);
-                    scheduleGrid.add(seanceBox, dayIndex + 1, timeIndex + 1);
+                    // Swap: column = timeIndex + 1, row = dayIndex + 1
+                    scheduleGrid.add(seanceBox, timeIndex + 1, dayIndex + 1);
                 }
             }
         } catch (Exception e) {

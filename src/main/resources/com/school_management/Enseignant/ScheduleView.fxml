@@ -6,17 +6,16 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.school_management.controller.enseignant.ScheduleController" spacing="15" style="-fx-padding: 20;">
     <Label text="Mon Emploi du Temps" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />
+    
+    <Label fx:id="lblInfo" text="" 
+           style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #34495e;"/>
+    
     <Separator />
     
-    <TableView fx:id="scheduleTable" VBox.vgrow="ALWAYS">
-        <columns>
-            <TableColumn fx:id="jourColumn" text="Jour" prefWidth="100" />
-            <TableColumn fx:id="heureDebutColumn" text="Heure Début" prefWidth="100" />
-            <TableColumn fx:id="heureFinColumn" text="Heure Fin" prefWidth="100" />
-            <TableColumn fx:id="matiereColumn" text="Matière" prefWidth="150" />
-            <TableColumn fx:id="classeColumn" text="Classe" prefWidth="100" />
-            <TableColumn fx:id="salleColumn" text="Salle" prefWidth="80" />
-            <TableColumn fx:id="nbEtudiantsColumn" text="Nb. Étudiants" prefWidth="120" />
-        </columns>
-    </TableView>
+    <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" 
+                style="-fx-background-color: transparent;">
+        <GridPane fx:id="scheduleGrid" 
+                  style="-fx-background-color: white; -fx-border-color: #bdc3c7; -fx-border-width: 2;">
+        </GridPane>
+    </ScrollPane>
 </VBox>

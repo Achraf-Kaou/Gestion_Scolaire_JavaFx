@@ -39,11 +39,13 @@
         </columns>
     </TableView>
 
+    <Label text="Liste des spécialités :" style="-fx-font-weight: bold;"/>
     <TableView fx:id="table" prefHeight="300" style="-fx-background-color: #f6f6f6;">
         <columns>
             <TableColumn fx:id="colId" text="ID" prefWidth="60" />
             <TableColumn fx:id="colCode" text="Code" prefWidth="120" />
             <TableColumn fx:id="colNom" text="Nom" prefWidth="180" />
+            <TableColumn fx:id="colMatieres" text="Matières associées" prefWidth="300" />
         </columns>
     </TableView>
 </VBox>
