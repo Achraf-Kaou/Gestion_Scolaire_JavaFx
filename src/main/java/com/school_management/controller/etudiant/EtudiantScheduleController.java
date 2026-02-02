@@ -131,11 +131,9 @@ public class EtudiantScheduleController {
                     VBox seanceBox = createSeanceBox(seance);
                     scheduleGrid.add(seanceBox, timeIndex + 1, dayIndex + 1);
                     
-                    // Calculate column span based on duration
+                    // Calculate and set column span based on duration
                     int columnSpan = ScheduleUtils.calculateColumnSpan(seance);
-                    if (columnSpan > 1) {
-                        GridPane.setColumnSpan(seanceBox, columnSpan);
-                    }
+                    GridPane.setColumnSpan(seanceBox, columnSpan);
                     
                     // Adjust height based on duration
                     double blockHeight = ScheduleUtils.calculateBlockHeight(seance);

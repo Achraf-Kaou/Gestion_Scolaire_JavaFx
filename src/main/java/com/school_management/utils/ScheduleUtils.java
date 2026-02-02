@@ -20,6 +20,8 @@ public class ScheduleUtils {
      */
     public static double getDurationInHours(Seance seance) {
         if (seance.getHeureDebut() == null || seance.getHeureFin() == null) {
+            System.err.println("Warning: Seance with ID " + seance.getId() + 
+                             " has null start or end time. Using default duration of 1 hour.");
             return 1.0;
         }
         
@@ -27,6 +29,10 @@ public class ScheduleUtils {
         
         // Validate that end time is after start time
         if (minutes < 0) {
+            System.err.println("Warning: Seance with ID " + seance.getId() + 
+                             " has end time before start time (" + 
+                             seance.getHeureDebut() + " to " + seance.getHeureFin() + 
+                             "). Using default duration of 1 hour.");
             return 1.0; // Default to 1 hour for invalid data
         }
         
