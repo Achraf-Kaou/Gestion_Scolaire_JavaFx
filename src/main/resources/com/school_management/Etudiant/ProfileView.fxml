@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.school_management.controller.enseignant.ProfileController" spacing="15" style="-fx-padding: 20;">
-    <Label text="Mon Profil" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.school_management.controller.etudiant.EtudiantProfileController" spacing="15" style="-fx-padding: 20;">
+    <Label text="Mon Profil" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #16A085;" />
     <Separator />
     
     <GridPane hgap="15" vgap="10">
@@ -14,7 +14,7 @@
             <ColumnConstraints minWidth="250" />
         </columnConstraints>
         
-        <Label text="Numéro Enseignant:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Numéro Étudiant:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label fx:id="numeroLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         
         <Label text="Nom:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -32,14 +32,14 @@
         <Label text="Adresse:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="5" />
         <TextField fx:id="adresseField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         
-        <Label text="Spécialité:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-        <Label fx:id="specialiteLabel" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <Label text="Classe:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <Label fx:id="classeLabel" GridPane.columnIndex="1" GridPane.rowIndex="6" />
         
-        <Label text="Grade:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-        <Label fx:id="gradeLabel" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <Label text="Date de naissance:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+        <Label fx:id="birthDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="7" />
         
-        <Label text="Date de Recrutement:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-        <Label fx:id="dateRecrutementLabel" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        <Label text="Date d'inscription:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+        <Label fx:id="dateInscriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="8" />
     </GridPane>
     
     <HBox spacing="10" alignment="CENTER_LEFT">

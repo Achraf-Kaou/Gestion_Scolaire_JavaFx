@@ -22,6 +22,7 @@ public class EtudiantController {
     @FXML private TextField txtTelephone;
     @FXML private TextField txtAdresse;
     @FXML private TextField txtNumeroEtudiant;
+    @FXML private TextField txtSearch;
     @FXML private PasswordField txtPassword;
     @FXML private DatePicker dpBirthDate;
     @FXML private DatePicker dpDateInscription;
@@ -42,6 +43,7 @@ public class EtudiantController {
     private final ClasseService classeService = new ClasseServiceImpl();
     private final ObservableList<Etudiant> etudiants = FXCollections.observableArrayList();
     private final ObservableList<Classe> classes = FXCollections.observableArrayList();
+    private List<Etudiant> allEtudiants = new java.util.ArrayList<>();  // Cache for search filtering
 
     @FXML
     public void initialize() {
@@ -87,6 +89,9 @@ public class EtudiantController {
         btnModifier.setOnAction(e -> modifierEtudiant());
         btnSupprimer.setOnAction(e -> supprimerEtudiant());
 
+        // Add search functionality
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> filterTable(newValue));
+
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
                 txtNom.setText(newSel.getNom());
@@ -124,9 +129,31 @@ public class EtudiantController {
                     etudiant.setClasse(classe);
                 }
             }
+            allEtudiants = etudiantList;  // Cache the full list
             etudiants.setAll(etudiantList);
+            // Apply current search filter if any
+            if (txtSearch != null && !txtSearch.getText().isEmpty()) {
+                filterTable(txtSearch.getText());
+            }
         } catch (Exception e) {
             alert("Erreur", "Impossible de charger les étudiants :\n" + e.getMessage());
+        }
+    }
+
+    private void filterTable(String searchText) {
+        if (searchText == null || searchText.trim().isEmpty()) {
+            etudiants.setAll(allEtudiants);
+        } else {
+            String search = searchText.toLowerCase().trim();
+            List<Etudiant> filtered = allEtudiants.stream()
+                .filter(e -> 
+                    (e.getNom() != null && e.getNom().toLowerCase().contains(search)) ||
+                    (e.getPrenom() != null && e.getPrenom().toLowerCase().contains(search)) ||
+                    (e.getEmail() != null && e.getEmail().toLowerCase().contains(search)) ||
+                    (e.getNumeroEtudiant() != null && e.getNumeroEtudiant().toLowerCase().contains(search))
+                )
+                .toList();
+            etudiants.setAll(filtered);
         }
     }
 

@@ -21,6 +21,7 @@ public class ClasseController {
     @FXML private TextField txtNom;
     @FXML private TextField txtCapaciteMax;
     @FXML private TextField txtAnneeScolaire;
+    @FXML private TextField txtSearch;
     @FXML private ComboBox<TypeDiplome> cbTypeDiplome;
     @FXML private ComboBox<NiveauAnnee> cbNiveauAnnee;
     @FXML private ComboBox<Specialite> cbSpecialite;
@@ -41,6 +42,7 @@ public class ClasseController {
     private final SpecialiteService specialiteService = new SpecialiteServiceImpl();
     private final ObservableList<Classe> classes = FXCollections.observableArrayList();
     private final ObservableList<Specialite> specialites = FXCollections.observableArrayList();
+    private List<Classe> allClasses = new java.util.ArrayList<>();  // Cache for search filtering
 
     @FXML
     public void initialize() {
@@ -96,6 +98,9 @@ public class ClasseController {
         btnModifier.setOnAction(e -> modifierClasse());
         btnSupprimer.setOnAction(e -> supprimerClasse());
 
+        // Add search functionality
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> filterTable(newValue));
+
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
                 txtCode.setText(newSel.getCode());
@@ -130,9 +135,29 @@ public class ClasseController {
                     classe.setSpecialite(specialite);
                 }
             }
+            allClasses = classeList;  // Cache the full list
             classes.setAll(classeList);
+            // Apply current search filter if any
+            if (txtSearch != null && !txtSearch.getText().isEmpty()) {
+                filterTable(txtSearch.getText());
+            }
         } catch (Exception e) {
             alert("Erreur", "Impossible de charger les classes :\n" + e.getMessage());
+        }
+    }
+
+    private void filterTable(String searchText) {
+        if (searchText == null || searchText.trim().isEmpty()) {
+            classes.setAll(allClasses);
+        } else {
+            String search = searchText.toLowerCase().trim();
+            List<Classe> filtered = allClasses.stream()
+                .filter(c -> 
+                    (c.getCode() != null && c.getCode().toLowerCase().contains(search)) ||
+                    (c.getNom() != null && c.getNom().toLowerCase().contains(search))
+                )
+                .toList();
+            classes.setAll(filtered);
         }
     }
 

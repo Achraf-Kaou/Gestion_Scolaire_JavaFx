@@ -35,6 +35,7 @@ public class SpecialiteController {
     @FXML private TableColumn<Specialite, Long> colId;
     @FXML private TableColumn<Specialite, String> colCode;
     @FXML private TableColumn<Specialite, String> colNom;
+    @FXML private TableColumn<Specialite, String> colMatieres;
     @FXML private TableView<Matiere> matieresTable;
     @FXML private TableColumn<Matiere, Long> colMatId;
     @FXML private TableColumn<Matiere, String> colMatCode;
@@ -57,6 +58,19 @@ public class SpecialiteController {
         colId.setCellValueFactory(data -> new javafx.beans.property.SimpleLongProperty(data.getValue().getId()).asObject());
         colCode.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getCode()));
         colNom.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNom()));
+        colMatieres.setCellValueFactory(data -> {
+            Set<Matiere> matieres = data.getValue().getMatieres();
+            if (matieres == null || matieres.isEmpty()) {
+                return new javafx.beans.property.SimpleStringProperty("Aucune matière");
+            }
+            String matieresStr = matieres.stream()
+                .map(m -> m.getCode() + " (" + m.getNom() + ")")
+                .sorted()
+                .reduce((a, b) -> a + ", " + b)
+                .orElse("Aucune matière");
+            return new javafx.beans.property.SimpleStringProperty(matieresStr);
+        });
+        colMatieres.setStyle("-fx-wrap-text: true;");
         table.setItems(specialites);
 
         colMatId.setCellValueFactory(data -> new javafx.beans.property.SimpleLongProperty(data.getValue().getId()).asObject());
