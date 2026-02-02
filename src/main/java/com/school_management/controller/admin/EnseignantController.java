@@ -20,6 +20,7 @@ public class EnseignantController {
     @FXML private TextField txtNumeroEnseignant;
     @FXML private TextField txtSpecialite;
     @FXML private TextField txtGrade;
+    @FXML private TextField txtSearch;
     @FXML private PasswordField txtPassword;
     @FXML private DatePicker dpBirthDate;
     @FXML private DatePicker dpDateRecrutement;
@@ -57,6 +58,9 @@ public class EnseignantController {
         btnModifier.setOnAction(e -> modifierEnseignant());
         btnSupprimer.setOnAction(e -> supprimerEnseignant());
 
+        // Add search functionality
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> filterTable(newValue));
+
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
                 txtNom.setText(newSel.getNom());
@@ -79,8 +83,35 @@ public class EnseignantController {
     private void refreshTable() {
         try {
             enseignants.setAll(enseignantService.lireTous());
+            // Apply current search filter if any
+            if (txtSearch != null && !txtSearch.getText().isEmpty()) {
+                filterTable(txtSearch.getText());
+            }
         } catch (Exception e) {
             alert("Erreur", "Impossible de charger les enseignants :\n" + e.getMessage());
+        }
+    }
+
+    private void filterTable(String searchText) {
+        try {
+            var enseignantList = enseignantService.lireTous();
+            
+            if (searchText == null || searchText.trim().isEmpty()) {
+                enseignants.setAll(enseignantList);
+            } else {
+                String search = searchText.toLowerCase().trim();
+                var filtered = enseignantList.stream()
+                    .filter(e -> 
+                        (e.getNom() != null && e.getNom().toLowerCase().contains(search)) ||
+                        (e.getPrenom() != null && e.getPrenom().toLowerCase().contains(search)) ||
+                        (e.getEmail() != null && e.getEmail().toLowerCase().contains(search)) ||
+                        (e.getNumeroEnseignant() != null && e.getNumeroEnseignant().toLowerCase().contains(search))
+                    )
+                    .toList();
+                enseignants.setAll(filtered);
+            }
+        } catch (Exception e) {
+            alert("Erreur", "Impossible de filtrer les enseignants :\n" + e.getMessage());
         }
     }
 

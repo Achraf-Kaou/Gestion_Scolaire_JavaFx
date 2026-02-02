@@ -21,6 +21,7 @@ public class ClasseController {
     @FXML private TextField txtNom;
     @FXML private TextField txtCapaciteMax;
     @FXML private TextField txtAnneeScolaire;
+    @FXML private TextField txtSearch;
     @FXML private ComboBox<TypeDiplome> cbTypeDiplome;
     @FXML private ComboBox<NiveauAnnee> cbNiveauAnnee;
     @FXML private ComboBox<Specialite> cbSpecialite;
@@ -96,6 +97,9 @@ public class ClasseController {
         btnModifier.setOnAction(e -> modifierClasse());
         btnSupprimer.setOnAction(e -> supprimerClasse());
 
+        // Add search functionality
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> filterTable(newValue));
+
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
                 txtCode.setText(newSel.getCode());
@@ -131,8 +135,40 @@ public class ClasseController {
                 }
             }
             classes.setAll(classeList);
+            // Apply current search filter if any
+            if (txtSearch != null && !txtSearch.getText().isEmpty()) {
+                filterTable(txtSearch.getText());
+            }
         } catch (Exception e) {
             alert("Erreur", "Impossible de charger les classes :\n" + e.getMessage());
+        }
+    }
+
+    private void filterTable(String searchText) {
+        try {
+            List<Classe> classeList = classeService.lireTous();
+            // Load the specialite for each classe
+            for (Classe classe : classeList) {
+                if (classe.getSpecialiteId() != null) {
+                    Specialite specialite = specialiteService.listeSpecialitesId(classe.getSpecialiteId());
+                    classe.setSpecialite(specialite);
+                }
+            }
+            
+            if (searchText == null || searchText.trim().isEmpty()) {
+                classes.setAll(classeList);
+            } else {
+                String search = searchText.toLowerCase().trim();
+                List<Classe> filtered = classeList.stream()
+                    .filter(c -> 
+                        (c.getCode() != null && c.getCode().toLowerCase().contains(search)) ||
+                        (c.getNom() != null && c.getNom().toLowerCase().contains(search))
+                    )
+                    .toList();
+                classes.setAll(filtered);
+            }
+        } catch (Exception e) {
+            alert("Erreur", "Impossible de filtrer les classes :\n" + e.getMessage());
         }
     }
 

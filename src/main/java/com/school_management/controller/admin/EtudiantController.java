@@ -22,6 +22,7 @@ public class EtudiantController {
     @FXML private TextField txtTelephone;
     @FXML private TextField txtAdresse;
     @FXML private TextField txtNumeroEtudiant;
+    @FXML private TextField txtSearch;
     @FXML private PasswordField txtPassword;
     @FXML private DatePicker dpBirthDate;
     @FXML private DatePicker dpDateInscription;
@@ -87,6 +88,9 @@ public class EtudiantController {
         btnModifier.setOnAction(e -> modifierEtudiant());
         btnSupprimer.setOnAction(e -> supprimerEtudiant());
 
+        // Add search functionality
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> filterTable(newValue));
+
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
                 txtNom.setText(newSel.getNom());
@@ -125,8 +129,42 @@ public class EtudiantController {
                 }
             }
             etudiants.setAll(etudiantList);
+            // Apply current search filter if any
+            if (txtSearch != null && !txtSearch.getText().isEmpty()) {
+                filterTable(txtSearch.getText());
+            }
         } catch (Exception e) {
             alert("Erreur", "Impossible de charger les étudiants :\n" + e.getMessage());
+        }
+    }
+
+    private void filterTable(String searchText) {
+        try {
+            List<Etudiant> etudiantList = etudiantService.lireTous();
+            // Load the classe for each etudiant
+            for (Etudiant etudiant : etudiantList) {
+                if (etudiant.getClasseId() != null) {
+                    Classe classe = classeService.lireParId(etudiant.getClasseId());
+                    etudiant.setClasse(classe);
+                }
+            }
+            
+            if (searchText == null || searchText.trim().isEmpty()) {
+                etudiants.setAll(etudiantList);
+            } else {
+                String search = searchText.toLowerCase().trim();
+                List<Etudiant> filtered = etudiantList.stream()
+                    .filter(e -> 
+                        (e.getNom() != null && e.getNom().toLowerCase().contains(search)) ||
+                        (e.getPrenom() != null && e.getPrenom().toLowerCase().contains(search)) ||
+                        (e.getEmail() != null && e.getEmail().toLowerCase().contains(search)) ||
+                        (e.getNumeroEtudiant() != null && e.getNumeroEtudiant().toLowerCase().contains(search))
+                    )
+                    .toList();
+                etudiants.setAll(filtered);
+            }
+        } catch (Exception e) {
+            alert("Erreur", "Impossible de filtrer les étudiants :\n" + e.getMessage());
         }
     }
 

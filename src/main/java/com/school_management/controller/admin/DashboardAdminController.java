@@ -58,8 +58,15 @@ public class DashboardAdminController {
     }
 
     private void handleLogout() {
-        System.out.println("Déconnexion");
-        // Implémente la logique de déconnexion (retour à la page login, nettoyage session, etc)
+        try {
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/com/school_management/LoginView.fxml"));
+            javafx.scene.Scene scene = new javafx.scene.Scene(loader.load());
+            javafx.stage.Stage stage = (javafx.stage.Stage) btnLogout.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showGestionMatieres(){

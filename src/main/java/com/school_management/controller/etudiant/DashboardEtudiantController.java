@@ -21,6 +21,9 @@ public class DashboardEtudiantController {
     private Button btnLogout;
 
     @FXML
+    private Button btnProfile;
+
+    @FXML
     private Button btnSchedule;
 
     @FXML
@@ -34,11 +37,12 @@ public class DashboardEtudiantController {
     @FXML
     public void initialize() {
         btnLogout.setOnAction(e -> handleLogout());
+        btnProfile.setOnAction(e -> showProfile());
         btnSchedule.setOnAction(e -> showSchedule());
         btnClass.setOnAction(e -> showClass());
         
-        // Show schedule by default
-        showSchedule();
+        // Show profile by default
+        showProfile();
     }
 
     public void setEtudiant(Etudiant etudiant) {
@@ -60,6 +64,11 @@ public class DashboardEtudiantController {
         }
     }
 
+    private void showProfile() {
+        contentArea.getChildren().clear();
+        loadViewInContent("/com/school_management/Etudiant/ProfileView.fxml");
+    }
+
     private void showSchedule() {
         contentArea.getChildren().clear();
         loadViewInContent("/com/school_management/Etudiant/ScheduleView.fxml");
@@ -77,7 +86,9 @@ public class DashboardEtudiantController {
             
             // Pass etudiant to the loaded controller
             Object controller = loader.getController();
-            if (controller instanceof EtudiantScheduleController) {
+            if (controller instanceof EtudiantProfileController) {
+                ((EtudiantProfileController) controller).setEtudiant(etudiant);
+            } else if (controller instanceof EtudiantScheduleController) {
                 ((EtudiantScheduleController) controller).setEtudiant(etudiant);
             } else if (controller instanceof ClassViewController) {
                 ((ClassViewController) controller).setEtudiant(etudiant);

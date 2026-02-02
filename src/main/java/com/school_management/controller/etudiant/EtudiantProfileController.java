@@ -1,12 +1,12 @@
-package com.school_management.controller.enseignant;
+package com.school_management.controller.etudiant;
 
-import com.school_management.model.Enseignant;
-import com.school_management.service.EnseignantService;
-import com.school_management.service.EnseignantServiceImpl;
+import com.school_management.model.Etudiant;
+import com.school_management.service.EtudiantService;
+import com.school_management.service.EtudiantServiceImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class ProfileController {
+public class EtudiantProfileController {
 
     @FXML
     private Label numeroLabel;
@@ -27,13 +27,13 @@ public class ProfileController {
     private TextField adresseField;
 
     @FXML
-    private Label specialiteLabel;
+    private Label classeLabel;
 
     @FXML
-    private Label gradeLabel;
+    private Label birthDateLabel;
 
     @FXML
-    private Label dateRecrutementLabel;
+    private Label dateInscriptionLabel;
 
     @FXML
     private Button btnEdit;
@@ -44,8 +44,8 @@ public class ProfileController {
     @FXML
     private Button btnCancel;
 
-    private Enseignant enseignant;
-    private final EnseignantService enseignantService = new EnseignantServiceImpl();
+    private Etudiant etudiant;
+    private final EtudiantService etudiantService = new EtudiantServiceImpl();
 
     @FXML
     public void initialize() {
@@ -57,18 +57,24 @@ public class ProfileController {
         btnCancel.setOnAction(e -> cancelEditing());
     }
 
-    public void setEnseignant(Enseignant enseignant) {
-        this.enseignant = enseignant;
-        if (enseignant != null) {
-            numeroLabel.setText(enseignant.getNumeroEnseignant() != null ? enseignant.getNumeroEnseignant() : "N/A");
-            nomField.setText(enseignant.getNom() != null ? enseignant.getNom() : "");
-            prenomField.setText(enseignant.getPrenom() != null ? enseignant.getPrenom() : "");
-            emailField.setText(enseignant.getEmail() != null ? enseignant.getEmail() : "");
-            telephoneField.setText(enseignant.getTelephone() != null ? enseignant.getTelephone() : "");
-            adresseField.setText(enseignant.getAdresse() != null ? enseignant.getAdresse() : "");
-            specialiteLabel.setText(enseignant.getSpecialite() != null ? enseignant.getSpecialite() : "N/A");
-            gradeLabel.setText(enseignant.getGrade() != null ? enseignant.getGrade() : "N/A");
-            dateRecrutementLabel.setText(enseignant.getDateRecrutement() != null ? enseignant.getDateRecrutement().toString() : "N/A");
+    public void setEtudiant(Etudiant etudiant) {
+        this.etudiant = etudiant;
+        if (etudiant != null) {
+            numeroLabel.setText(etudiant.getNumeroEtudiant() != null ? etudiant.getNumeroEtudiant() : "N/A");
+            nomField.setText(etudiant.getNom() != null ? etudiant.getNom() : "");
+            prenomField.setText(etudiant.getPrenom() != null ? etudiant.getPrenom() : "");
+            emailField.setText(etudiant.getEmail() != null ? etudiant.getEmail() : "");
+            telephoneField.setText(etudiant.getTelephone() != null ? etudiant.getTelephone() : "");
+            adresseField.setText(etudiant.getAdresse() != null ? etudiant.getAdresse() : "");
+            
+            if (etudiant.getClasse() != null) {
+                classeLabel.setText(etudiant.getClasse().getCode() + " - " + etudiant.getClasse().getNom());
+            } else {
+                classeLabel.setText("N/A");
+            }
+            
+            birthDateLabel.setText(etudiant.getBirthDate() != null ? etudiant.getBirthDate().toString() : "N/A");
+            dateInscriptionLabel.setText(etudiant.getDateInscription() != null ? etudiant.getDateInscription().toString() : "N/A");
         }
     }
 
@@ -81,15 +87,15 @@ public class ProfileController {
 
     private void cancelEditing() {
         setFieldsEditable(false);
-        setEnseignant(enseignant); // Reload original data
+        setEtudiant(etudiant); // Reload original data
         btnEdit.setVisible(true);
         btnSave.setVisible(false);
         btnCancel.setVisible(false);
     }
 
     private void saveProfile() {
-        if (enseignant == null) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Aucun enseignant sélectionné.");
+        if (etudiant == null) {
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Aucun étudiant sélectionné.");
             return;
         }
 
@@ -101,15 +107,15 @@ public class ProfileController {
         }
 
         try {
-            // Update enseignant object
-            enseignant.setNom(nomField.getText().trim());
-            enseignant.setPrenom(prenomField.getText().trim());
-            enseignant.setEmail(emailField.getText().trim());
-            enseignant.setTelephone(telephoneField.getText().trim());
-            enseignant.setAdresse(adresseField.getText().trim());
+            // Update etudiant object
+            etudiant.setNom(nomField.getText().trim());
+            etudiant.setPrenom(prenomField.getText().trim());
+            etudiant.setEmail(emailField.getText().trim());
+            etudiant.setTelephone(telephoneField.getText().trim());
+            etudiant.setAdresse(adresseField.getText().trim());
 
             // Save to database
-            enseignantService.modifier(enseignant);
+            etudiantService.modifier(etudiant);
 
             showAlert(Alert.AlertType.INFORMATION, "Succès", "Profil mis à jour avec succès.");
             setFieldsEditable(false);
@@ -131,7 +137,7 @@ public class ProfileController {
 
     private void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);
-        alert.setTitle("Profil Enseignant");
+        alert.setTitle("Profil Étudiant");
         alert.setHeaderText(title);
         alert.setContentText(message);
         alert.showAndWait();

@@ -14,6 +14,7 @@
     </top>
     <left>
         <VBox spacing="15" style="-fx-background-color: #1ABC9C; -fx-padding: 15;" prefWidth="200">
+            <Button text="Mon Profil" fx:id="btnProfile" maxWidth="Infinity" style="-fx-background-color: #27AE60; -fx-text-fill: white;" />
             <Button text="Mon Emploi du Temps" fx:id="btnSchedule" maxWidth="Infinity" style="-fx-background-color: #27AE60; -fx-text-fill: white;" />
             <Button text="Ma Classe" fx:id="btnClass" maxWidth="Infinity" style="-fx-background-color: #27AE60; -fx-text-fill: white;" />
         </VBox>
