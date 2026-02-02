@@ -193,7 +193,7 @@ public class ScheduleDisplayController {
                     }
                     
                     // Adjust height based on duration
-                    double blockHeight = ScheduleUtils.calculateBlockHeight(seance, 60);
+                    double blockHeight = ScheduleUtils.calculateBlockHeight(seance);
                     seanceBox.setPrefHeight(blockHeight);
                 }
             }

@@ -9,6 +9,11 @@ import java.time.Duration;
 public class ScheduleUtils {
     
     /**
+     * Base height per hour in pixels for schedule blocks
+     */
+    public static final double BASE_HEIGHT_PER_HOUR = 60.0;
+    
+    /**
      * Calculate the duration of a session in hours
      * @param seance The session
      * @return Duration in hours, defaults to 1.0 if times are null or invalid
@@ -38,6 +43,15 @@ public class ScheduleUtils {
         // Round up to the nearest hour
         // 1 hour = 1 column, 1.5 hours = 2 columns, 2 hours = 2 columns
         return (int) Math.ceil(durationInHours);
+    }
+    
+    /**
+     * Calculate the preferred height for a schedule block using the default base height
+     * @param seance The session
+     * @return Preferred height in pixels
+     */
+    public static double calculateBlockHeight(Seance seance) {
+        return calculateBlockHeight(seance, BASE_HEIGHT_PER_HOUR);
     }
     
     /**
