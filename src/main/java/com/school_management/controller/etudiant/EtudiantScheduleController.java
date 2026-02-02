@@ -228,8 +228,8 @@ public class EtudiantScheduleController {
 
     private int calculateColumnSpan(Seance seance) {
         double durationInHours = getDurationInHours(seance);
-        // Round to nearest 0.5 hour increment
-        // 1 hour = 1 column, 1.5 hours = 1.5 columns, 2 hours = 2 columns
+        // Round up to the nearest hour
+        // 1 hour = 1 column, 1.5 hours = 2 columns, 2 hours = 2 columns
         return (int) Math.ceil(durationInHours);
     }
 
