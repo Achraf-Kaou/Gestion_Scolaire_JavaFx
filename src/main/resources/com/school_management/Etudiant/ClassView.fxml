@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.school_management.controller.etudiant.ClassViewController" spacing="15" style="-fx-padding: 20;">
+    <Label text="Ma Classe" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #16A085;" />
+    <Separator />
+    
+    <!-- Class Information -->
+    <VBox spacing="10" style="-fx-padding: 10; -fx-border-color: #BDC3C7; -fx-border-radius: 5;">
+        <Label text="Informations sur la classe" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+        <GridPane hgap="15" vgap="8">
+            <columnConstraints>
+                <ColumnConstraints minWidth="120" />
+                <ColumnConstraints minWidth="200" />
+            </columnConstraints>
+            
+            <Label text="Classe:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label fx:id="classeLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            
+            <Label text="Spécialité:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label fx:id="specialiteLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            
+            <Label text="Effectif:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label fx:id="effectifLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        </GridPane>
+    </VBox>
+    
+    <!-- Teachers Section -->
+    <Label text="Enseignants à contacter" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+    <TableView fx:id="teachersTable" prefHeight="200">
+        <columns>
+            <TableColumn fx:id="teacherNomColumn" text="Nom" prefWidth="150" />
+            <TableColumn fx:id="teacherPrenomColumn" text="Prénom" prefWidth="150" />
+            <TableColumn fx:id="matiereColumn" text="Matière" prefWidth="150" />
+            <TableColumn fx:id="emailColumn" text="Email" prefWidth="200" />
+            <TableColumn fx:id="telephoneColumn" text="Téléphone" prefWidth="120" />
+        </columns>
+    </TableView>
+    
+    <!-- Classmates Section -->
+    <Label text="Mes collègues de classe" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+    <TableView fx:id="classmatesTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="numeroColumn" text="N° Étudiant" prefWidth="120" />
+            <TableColumn fx:id="nomColumn" text="Nom" prefWidth="150" />
+            <TableColumn fx:id="prenomColumn" text="Prénom" prefWidth="150" />
+            <TableColumn fx:id="studentEmailColumn" text="Email" prefWidth="200" />
+            <TableColumn fx:id="studentTelephoneColumn" text="Téléphone" prefWidth="120" />
+        </columns>
+    </TableView>
+</VBox>
