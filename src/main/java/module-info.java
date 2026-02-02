@@ -21,10 +21,14 @@ module com.school_management.school_management {
     opens database.enseignant;
     opens database.specialite;
     opens database.matiere;
+    opens database.classe;
+    opens database.emploiDuTemps;
+    opens database.seance;
 
     exports com.school_management;
     exports com.school_management.controller;
     exports com.school_management.controller.admin;
     opens com.school_management.controller.admin to javafx.fxml;
-
+    opens com.school_management.controller.etudiant to javafx.fxml;
+    opens com.school_management.controller.enseignant to javafx.fxml;
 }
