@@ -2,6 +2,7 @@ package com.school_management.controller.admin;
 
 import com.school_management.model.*;
 import com.school_management.service.*;
+import com.school_management.utils.ScheduleUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -186,16 +187,14 @@ public class ScheduleDisplayController {
                     scheduleGrid.add(seanceBox, timeIndex + 1, dayIndex + 1);
                     
                     // Calculate column span based on duration
-                    int columnSpan = calculateColumnSpan(seance);
+                    int columnSpan = ScheduleUtils.calculateColumnSpan(seance);
                     if (columnSpan > 1) {
                         GridPane.setColumnSpan(seanceBox, columnSpan);
                     }
                     
                     // Adjust height based on duration
-                    double durationInHours = getDurationInHours(seance);
-                    if (durationInHours > 0) {
-                        seanceBox.setPrefHeight(60 * durationInHours);
-                    }
+                    double blockHeight = ScheduleUtils.calculateBlockHeight(seance, 60);
+                    seanceBox.setPrefHeight(blockHeight);
                 }
             }
         } catch (Exception e) {
@@ -269,22 +268,6 @@ public class ScheduleDisplayController {
         }
         
         return -1;
-    }
-
-    private double getDurationInHours(Seance seance) {
-        if (seance.getHeureDebut() == null || seance.getHeureFin() == null) {
-            return 1.0;
-        }
-        
-        long minutes = java.time.Duration.between(seance.getHeureDebut(), seance.getHeureFin()).toMinutes();
-        return minutes / 60.0;
-    }
-
-    private int calculateColumnSpan(Seance seance) {
-        double durationInHours = getDurationInHours(seance);
-        // Round up to the nearest hour
-        // 1 hour = 1 column, 1.5 hours = 2 columns, 2 hours = 2 columns
-        return (int) Math.ceil(durationInHours);
     }
 
     private void alert(String titre, String msg) {

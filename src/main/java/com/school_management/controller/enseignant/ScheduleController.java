@@ -5,6 +5,7 @@ import com.school_management.model.Enseignant;
 import com.school_management.model.Seance;
 import com.school_management.service.ClasseServiceImpl;
 import com.school_management.service.SeanceServiceImpl;
+import com.school_management.utils.ScheduleUtils;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -140,16 +141,14 @@ public class ScheduleController {
                     scheduleGrid.add(seanceBox, timeIndex + 1, dayIndex + 1);
                     
                     // Calculate column span based on duration
-                    int columnSpan = calculateColumnSpan(seance);
+                    int columnSpan = ScheduleUtils.calculateColumnSpan(seance);
                     if (columnSpan > 1) {
                         GridPane.setColumnSpan(seanceBox, columnSpan);
                     }
                     
                     // Adjust height based on duration
-                    double durationInHours = getDurationInHours(seance);
-                    if (durationInHours > 0) {
-                        seanceBox.setPrefHeight(60 * durationInHours);
-                    }
+                    double blockHeight = ScheduleUtils.calculateBlockHeight(seance, 60);
+                    seanceBox.setPrefHeight(blockHeight);
                 }
             }
         } catch (SQLException | IOException e) {
@@ -227,22 +226,6 @@ public class ScheduleController {
         }
         
         return -1;
-    }
-
-    private double getDurationInHours(Seance seance) {
-        if (seance.getHeureDebut() == null || seance.getHeureFin() == null) {
-            return 1.0;
-        }
-        
-        long minutes = java.time.Duration.between(seance.getHeureDebut(), seance.getHeureFin()).toMinutes();
-        return minutes / 60.0;
-    }
-
-    private int calculateColumnSpan(Seance seance) {
-        double durationInHours = getDurationInHours(seance);
-        // Round up to the nearest hour
-        // 1 hour = 1 column, 1.5 hours = 2 columns, 2 hours = 2 columns
-        return (int) Math.ceil(durationInHours);
     }
 
     private void showError(String title, String message) {
