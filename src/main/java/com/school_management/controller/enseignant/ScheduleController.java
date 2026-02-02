@@ -5,6 +5,7 @@ import com.school_management.model.Enseignant;
 import com.school_management.model.Seance;
 import com.school_management.service.ClasseServiceImpl;
 import com.school_management.service.SeanceServiceImpl;
+import com.school_management.utils.ScheduleUtils;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -138,6 +139,14 @@ public class ScheduleController {
                 if (dayIndex >= 0 && timeIndex >= 0) {
                     VBox seanceBox = createSeanceBox(seance);
                     scheduleGrid.add(seanceBox, timeIndex + 1, dayIndex + 1);
+                    
+                    // Calculate and set column span based on duration
+                    int columnSpan = ScheduleUtils.calculateColumnSpan(seance);
+                    GridPane.setColumnSpan(seanceBox, columnSpan);
+                    
+                    // Adjust height based on duration
+                    double blockHeight = ScheduleUtils.calculateBlockHeight(seance);
+                    seanceBox.setPrefHeight(blockHeight);
                 }
             }
         } catch (SQLException | IOException e) {

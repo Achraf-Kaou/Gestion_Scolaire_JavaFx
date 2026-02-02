@@ -2,6 +2,7 @@ package com.school_management.controller.admin;
 
 import com.school_management.model.*;
 import com.school_management.service.*;
+import com.school_management.utils.ScheduleUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -184,6 +185,14 @@ public class ScheduleDisplayController {
                     VBox seanceBox = createSeanceBox(seance);
                     // Swap: column = timeIndex + 1, row = dayIndex + 1
                     scheduleGrid.add(seanceBox, timeIndex + 1, dayIndex + 1);
+                    
+                    // Calculate and set column span based on duration
+                    int columnSpan = ScheduleUtils.calculateColumnSpan(seance);
+                    GridPane.setColumnSpan(seanceBox, columnSpan);
+                    
+                    // Adjust height based on duration
+                    double blockHeight = ScheduleUtils.calculateBlockHeight(seance);
+                    seanceBox.setPrefHeight(blockHeight);
                 }
             }
         } catch (Exception e) {
