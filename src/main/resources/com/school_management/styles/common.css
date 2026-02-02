@@ -1,0 +1,283 @@
+/* Common Stylesheet for School Management Application */
+
+/* Color Palette */
+:root {
+    /* Admin Colors */
+    -fx-admin-primary: #34495e;
+    -fx-admin-secondary: #3498db;
+    -fx-admin-accent: #2ecc71;
+    -fx-admin-danger: #e74c3c;
+    
+    /* Teacher Colors */
+    -fx-teacher-primary: #2C3E50;
+    -fx-teacher-secondary: #34495E;
+    -fx-teacher-accent: #3498DB;
+    
+    /* Student Colors */
+    -fx-student-primary: #16A085;
+    -fx-student-secondary: #1ABC9C;
+    -fx-student-accent: #27AE60;
+    
+    /* Common Colors */
+    -fx-background-light: #ecf0f1;
+    -fx-background-dark: #bdc3c7;
+    -fx-text-dark: #2c3e50;
+    -fx-text-light: white;
+    -fx-border-color: #bdc3c7;
+}
+
+/* Global Styles */
+.root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-font-size: 14px;
+}
+
+/* Buttons */
+.button {
+    -fx-background-radius: 5;
+    -fx-padding: 8 15;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-opacity: 0.8;
+}
+
+.button:pressed {
+    -fx-opacity: 0.6;
+}
+
+/* Primary Buttons */
+.button-primary {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+/* Success Buttons */
+.button-success {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+}
+
+/* Danger Buttons */
+.button-danger {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+}
+
+/* Text Fields */
+.text-field, .text-area, .password-field {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-padding: 5;
+}
+
+.text-field:focused, .text-area:focused, .password-field:focused {
+    -fx-border-color: #3498db;
+    -fx-border-width: 2;
+}
+
+/* Tables */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-width: 1;
+}
+
+.table-view .column-header {
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+    -fx-padding: 10 5;
+}
+
+.table-view .column-header:hover {
+    -fx-background-color: #2c3e50;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #ecf0f1;
+}
+
+.table-row-cell:even {
+    -fx-background-color: white;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #d5dbdb;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+.combo-box:focused {
+    -fx-border-color: #3498db;
+    -fx-border-width: 2;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: white;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #ecf0f1;
+}
+
+/* Labels */
+.label-header {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.label-subheader {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e;
+}
+
+/* Admin Dashboard Specific */
+.admin-header {
+    -fx-background-color: #2C3E50;
+    -fx-padding: 15;
+}
+
+.admin-sidebar {
+    -fx-background-color: #34495E;
+    -fx-padding: 15;
+}
+
+.admin-sidebar .button {
+    -fx-background-color: #7f8c8d;
+    -fx-text-fill: white;
+    -fx-padding: 10;
+}
+
+.admin-sidebar .button:hover {
+    -fx-background-color: #95a5a6;
+}
+
+/* Teacher Dashboard Specific */
+.teacher-header {
+    -fx-background-color: #2C3E50;
+    -fx-padding: 15;
+}
+
+.teacher-sidebar {
+    -fx-background-color: #34495E;
+    -fx-padding: 15;
+}
+
+.teacher-sidebar .button {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+    -fx-padding: 10;
+}
+
+.teacher-sidebar .button:hover {
+    -fx-background-color: #5DADE2;
+}
+
+/* Student Dashboard Specific */
+.student-header {
+    -fx-background-color: #16A085;
+    -fx-padding: 15;
+}
+
+.student-sidebar {
+    -fx-background-color: #1ABC9C;
+    -fx-padding: 15;
+}
+
+.student-sidebar .button {
+    -fx-background-color: #27AE60;
+    -fx-text-fill: white;
+    -fx-padding: 10;
+}
+
+.student-sidebar .button:hover {
+    -fx-background-color: #52BE80;
+}
+
+/* Schedule Grid */
+.schedule-cell {
+    -fx-border-color: #bdc3c7;
+    -fx-border-width: 1;
+    -fx-padding: 5;
+}
+
+.schedule-header {
+    -fx-font-weight: bold;
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+}
+
+.schedule-day-header {
+    -fx-background-color: #ecf0f1;
+    -fx-font-weight: bold;
+}
+
+.schedule-seance {
+    -fx-background-color: #2ecc71;
+    -fx-background-radius: 5;
+    -fx-padding: 8;
+    -fx-border-color: #27ae60;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+/* Separator */
+.separator {
+    -fx-background-color: #bdc3c7;
+}
+
+/* DatePicker */
+.date-picker {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+.date-picker:focused {
+    -fx-border-color: #3498db;
+    -fx-border-width: 2;
+}
+
+/* ScrollPane */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Alert dialogs */
+.alert {
+    -fx-background-color: white;
+}
+
+.alert .header-panel {
+    -fx-background-color: #34495e;
+}
+
+.alert .header-panel .label {
+    -fx-text-fill: white;
+}
