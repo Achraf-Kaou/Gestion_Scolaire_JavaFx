@@ -18,6 +18,7 @@ La connexion est définie dans `src/main/java/com/school_management/config/Datab
 
 > ⚠️ Ces identifiants sont des valeurs de développement local.  
 > Créez de préférence un utilisateur MySQL dédié (ex: `school_app`) avec des droits limités.
+> Pour un déploiement réel, externalisez ces paramètres (variables d'environnement ou fichier de configuration sécurisé).
 
 Créez la base puis exécutez le script SQL :
 
@@ -38,4 +39,3 @@ Depuis la racine du projet :
 ## Documentation
 
 - Documentation technique : `DOCUMENTATION.md`
-- Guide utilisateur : `GUIDE_UTILISATION.md`
