@@ -24,15 +24,15 @@ Le projet suit une architecture en couches :
 
 ## Structure du projet
 
-- Code Java : `/tmp/workspace/Achraf-Kaou/Gestion_Scolaire_JavaFx/src/main/java/com/school_management`
-- Vues JavaFX : `/tmp/workspace/Achraf-Kaou/Gestion_Scolaire_JavaFx/src/main/resources/com/school_management`
-- Scripts SQL : `/tmp/workspace/Achraf-Kaou/Gestion_Scolaire_JavaFx/src/main/resources/database`
+- Code Java : `src/main/java/com/school_management`
+- Vues JavaFX : `src/main/resources/com/school_management`
+- Scripts SQL : `src/main/resources/database`
 
 ## Build et tests
 
 Commandes depuis la racine du projet :
 
 ```bash
-bash mvnw test
-bash mvnw javafx:run
+./mvnw test
+./mvnw javafx:run
 ```
