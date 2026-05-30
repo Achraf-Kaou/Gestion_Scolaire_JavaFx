@@ -16,6 +16,9 @@ La connexion est définie dans `src/main/java/com/school_management/config/Datab
 - Utilisateur : `root`
 - Mot de passe : `root`
 
+> ⚠️ Ces identifiants par défaut sont destinés au développement local uniquement.  
+> En environnement réel, utilisez des identifiants dédiés et une configuration sécurisée.
+
 Créez la base puis exécutez le script SQL :
 
 - `src/main/resources/database/createTables.sql`
