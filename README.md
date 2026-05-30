@@ -16,8 +16,8 @@ La connexion est définie dans `src/main/java/com/school_management/config/Datab
 - Utilisateur : `root`
 - Mot de passe : `root`
 
-> ⚠️ Ces identifiants par défaut sont destinés au développement local uniquement.  
-> En environnement réel, utilisez des identifiants dédiés et une configuration sécurisée.
+> ⚠️ Ces identifiants sont des valeurs de développement local.  
+> Créez de préférence un utilisateur MySQL dédié (ex: `school_app`) avec des droits limités.
 
 Créez la base puis exécutez le script SQL :
 
@@ -28,7 +28,10 @@ Créez la base puis exécutez le script SQL :
 Depuis la racine du projet :
 
 ```bash
+# Exécuter la suite de tests
 ./mvnw test
+
+# Lancer l'application JavaFX
 ./mvnw javafx:run
 ```
 
